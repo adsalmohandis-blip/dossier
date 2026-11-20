@@ -8,23 +8,19 @@
 <meta property="og:title" content="How Dossier works | ADMIT NEXUS">
 <meta property="og:description" content="Seven commands, a hash-chained log, gates that read the reports your build already writes, and a verification receipt with a QR code drawn locally.">
 <meta property="og:site_name" content="ADMIT NEXUS">
-<meta name="theme-color" content="#2A0A36">
+<meta name="theme-color" content="#581970">
 <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
+<div class="shell">
 <nav class="bar">
   <div class="in">
-    <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS">
-      <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-    </a>
-    <span class="div" aria-hidden="true"></span>
-    <a class="lock" href="../index.html">
-      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="currentColor"/></svg>
+    <a class="brand" href="../index.html">
+      <img src="../assets/admit-logo.png" alt="ADMIT" width="420" height="173">
+      <span class="rule" aria-hidden="true"></span>
+      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="#ffffff" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="#F3AA1F"/></svg>
       <span class="wm">Dossier</span>
     </a>
     <div class="navlinks">
@@ -124,19 +120,16 @@
       <div class="n">stays with you</div>
       <h3>Evidence Bundle</h3>
       <p>Every change, gate, decision and approval, sealed with one hash. This is what goes into the technical file.</p>
-      <p class="ar" dir="rtl" lang="ar">ملف الأدلة</p>
     </div>
     <div>
       <div class="n">for the person reading</div>
       <h3>Release Record</h3>
       <p>The same content rendered to read, for the assessor, the auditor and the engineer who joins next year.</p>
-      <p class="ar" dir="rtl" lang="ar">سجل الإصدار</p>
     </div>
     <div>
       <div class="n">safe to publish</div>
       <h3>Verification Receipt</h3>
       <p>A hash, a date and a status. No product names, no engineer names, no release dates.</p>
-      <p class="ar" dir="rtl" lang="ar">إيصال التحقق</p>
     </div>
   </div>
 </section>
@@ -146,11 +139,19 @@
   <p class="col">
     A receipt is one self-contained page: no scripts, no fonts fetched, no network calls, so it still
     works when someone opens it from a folder years from now. The QR code is drawn by Dossier itself
-    rather than by a web service, because a tool that promises nothing leaves your machine cannot
+    rather than by a web service, because a tool that uploads nothing unless you ask cannot
     quietly send your hashes to someone else's server to have a picture made.
   </p>
+  <p class="col">
+    <strong>The link is yours, and so is serving it.</strong> Dossier does not publish anything and
+    has nowhere to publish it to. Tell it where the page will live with
+    <code class="mono">--url-base</code> and it draws a QR code pointing there; say nothing and it
+    draws no code at all, because a QR that resolves to nothing makes a true record look forged. The
+    receipt still does its job either way: anyone holding the bundle can recompute its hash and
+    compare.
+  </p>
   <div class="demo">
-    <div class="qrbox" id="qrbox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 164" width="164" height="164" role="img" aria-label="QR code linking to the verification receipt"><rect width="164" height="164" fill="#ffffff"/><path d="M8 8h4v4h-4zM12 8h4v4h-4zM16 8h4v4h-4zM20 8h4v4h-4zM24 8h4v4h-4zM28 8h4v4h-4zM32 8h4v4h-4zM56 8h4v4h-4zM60 8h4v4h-4zM64 8h4v4h-4zM68 8h4v4h-4zM72 8h4v4h-4zM76 8h4v4h-4zM80 8h4v4h-4zM88 8h4v4h-4zM96 8h4v4h-4zM104 8h4v4h-4zM108 8h4v4h-4zM112 8h4v4h-4zM128 8h4v4h-4zM132 8h4v4h-4zM136 8h4v4h-4zM140 8h4v4h-4zM144 8h4v4h-4zM148 8h4v4h-4zM152 8h4v4h-4zM8 12h4v4h-4zM32 12h4v4h-4zM44 12h4v4h-4zM48 12h4v4h-4zM52 12h4v4h-4zM72 12h4v4h-4zM76 12h4v4h-4zM84 12h4v4h-4zM92 12h4v4h-4zM116 12h4v4h-4zM128 12h4v4h-4zM152 12h4v4h-4zM8 16h4v4h-4zM16 16h4v4h-4zM20 16h4v4h-4zM24 16h4v4h-4zM32 16h4v4h-4zM40 16h4v4h-4zM48 16h4v4h-4zM72 16h4v4h-4zM80 16h4v4h-4zM84 16h4v4h-4zM88 16h4v4h-4zM92 16h4v4h-4zM96 16h4v4h-4zM104 16h4v4h-4zM116 16h4v4h-4zM128 16h4v4h-4zM136 16h4v4h-4zM140 16h4v4h-4zM144 16h4v4h-4zM152 16h4v4h-4zM8 20h4v4h-4zM16 20h4v4h-4zM20 20h4v4h-4zM24 20h4v4h-4zM32 20h4v4h-4zM40 20h4v4h-4zM44 20h4v4h-4zM52 20h4v4h-4zM56 20h4v4h-4zM60 20h4v4h-4zM64 20h4v4h-4zM72 20h4v4h-4zM76 20h4v4h-4zM84 20h4v4h-4zM96 20h4v4h-4zM104 20h4v4h-4zM108 20h4v4h-4zM112 20h4v4h-4zM116 20h4v4h-4zM128 20h4v4h-4zM136 20h4v4h-4zM140 20h4v4h-4zM144 20h4v4h-4zM152 20h4v4h-4zM8 24h4v4h-4zM16 24h4v4h-4zM20 24h4v4h-4zM24 24h4v4h-4zM32 24h4v4h-4zM40 24h4v4h-4zM48 24h4v4h-4zM56 24h4v4h-4zM60 24h4v4h-4zM64 24h4v4h-4zM80 24h4v4h-4zM84 24h4v4h-4zM96 24h4v4h-4zM100 24h4v4h-4zM120 24h4v4h-4zM128 24h4v4h-4zM136 24h4v4h-4zM140 24h4v4h-4zM144 24h4v4h-4zM152 24h4v4h-4zM8 28h4v4h-4zM32 28h4v4h-4zM40 28h4v4h-4zM48 28h4v4h-4zM64 28h4v4h-4zM80 28h4v4h-4zM96 28h4v4h-4zM104 28h4v4h-4zM108 28h4v4h-4zM116 28h4v4h-4zM120 28h4v4h-4zM128 28h4v4h-4zM152 28h4v4h-4zM8 32h4v4h-4zM12 32h4v4h-4zM16 32h4v4h-4zM20 32h4v4h-4zM24 32h4v4h-4zM28 32h4v4h-4zM32 32h4v4h-4zM40 32h4v4h-4zM48 32h4v4h-4zM56 32h4v4h-4zM64 32h4v4h-4zM72 32h4v4h-4zM80 32h4v4h-4zM88 32h4v4h-4zM96 32h4v4h-4zM104 32h4v4h-4zM112 32h4v4h-4zM120 32h4v4h-4zM128 32h4v4h-4zM132 32h4v4h-4zM136 32h4v4h-4zM140 32h4v4h-4zM144 32h4v4h-4zM148 32h4v4h-4zM152 32h4v4h-4zM40 36h4v4h-4zM44 36h4v4h-4zM60 36h4v4h-4zM72 36h4v4h-4zM84 36h4v4h-4zM112 36h4v4h-4zM120 36h4v4h-4zM8 40h4v4h-4zM16 40h4v4h-4zM20 40h4v4h-4zM24 40h4v4h-4zM28 40h4v4h-4zM32 40h4v4h-4zM48 40h4v4h-4zM80 40h4v4h-4zM88 40h4v4h-4zM92 40h4v4h-4zM96 40h4v4h-4zM100 40h4v4h-4zM104 40h4v4h-4zM108 40h4v4h-4zM120 40h4v4h-4zM128 40h4v4h-4zM132 40h4v4h-4zM136 40h4v4h-4zM140 40h4v4h-4zM144 40h4v4h-4zM8 44h4v4h-4zM12 44h4v4h-4zM44 44h4v4h-4zM48 44h4v4h-4zM52 44h4v4h-4zM60 44h4v4h-4zM64 44h4v4h-4zM68 44h4v4h-4zM72 44h4v4h-4zM76 44h4v4h-4zM92 44h4v4h-4zM112 44h4v4h-4zM124 44h4v4h-4zM144 44h4v4h-4zM148 44h4v4h-4zM8 48h4v4h-4zM12 48h4v4h-4zM24 48h4v4h-4zM32 48h4v4h-4zM36 48h4v4h-4zM44 48h4v4h-4zM48 48h4v4h-4zM64 48h4v4h-4zM80 48h4v4h-4zM88 48h4v4h-4zM92 48h4v4h-4zM100 48h4v4h-4zM104 48h4v4h-4zM116 48h4v4h-4zM120 48h4v4h-4zM128 48h4v4h-4zM136 48h4v4h-4zM144 48h4v4h-4zM148 48h4v4h-4zM152 48h4v4h-4zM8 52h4v4h-4zM12 52h4v4h-4zM16 52h4v4h-4zM24 52h4v4h-4zM28 52h4v4h-4zM36 52h4v4h-4zM40 52h4v4h-4zM44 52h4v4h-4zM52 52h4v4h-4zM56 52h4v4h-4zM60 52h4v4h-4zM64 52h4v4h-4zM72 52h4v4h-4zM92 52h4v4h-4zM100 52h4v4h-4zM112 52h4v4h-4zM120 52h4v4h-4zM124 52h4v4h-4zM128 52h4v4h-4zM132 52h4v4h-4zM152 52h4v4h-4zM24 56h4v4h-4zM32 56h4v4h-4zM36 56h4v4h-4zM40 56h4v4h-4zM56 56h4v4h-4zM60 56h4v4h-4zM64 56h4v4h-4zM76 56h4v4h-4zM100 56h4v4h-4zM104 56h4v4h-4zM108 56h4v4h-4zM112 56h4v4h-4zM116 56h4v4h-4zM124 56h4v4h-4zM128 56h4v4h-4zM136 56h4v4h-4zM144 56h4v4h-4zM148 56h4v4h-4zM152 56h4v4h-4zM8 60h4v4h-4zM12 60h4v4h-4zM16 60h4v4h-4zM28 60h4v4h-4zM40 60h4v4h-4zM56 60h4v4h-4zM60 60h4v4h-4zM72 60h4v4h-4zM76 60h4v4h-4zM80 60h4v4h-4zM84 60h4v4h-4zM88 60h4v4h-4zM92 60h4v4h-4zM100 60h4v4h-4zM120 60h4v4h-4zM132 60h4v4h-4zM8 64h4v4h-4zM12 64h4v4h-4zM24 64h4v4h-4zM28 64h4v4h-4zM32 64h4v4h-4zM36 64h4v4h-4zM40 64h4v4h-4zM52 64h4v4h-4zM68 64h4v4h-4zM72 64h4v4h-4zM76 64h4v4h-4zM88 64h4v4h-4zM92 64h4v4h-4zM104 64h4v4h-4zM108 64h4v4h-4zM116 64h4v4h-4zM120 64h4v4h-4zM124 64h4v4h-4zM128 64h4v4h-4zM132 64h4v4h-4zM136 64h4v4h-4zM140 64h4v4h-4zM152 64h4v4h-4zM24 68h4v4h-4zM44 68h4v4h-4zM48 68h4v4h-4zM52 68h4v4h-4zM60 68h4v4h-4zM76 68h4v4h-4zM80 68h4v4h-4zM88 68h4v4h-4zM92 68h4v4h-4zM96 68h4v4h-4zM100 68h4v4h-4zM104 68h4v4h-4zM116 68h4v4h-4zM120 68h4v4h-4zM124 68h4v4h-4zM128 68h4v4h-4zM132 68h4v4h-4zM136 68h4v4h-4zM8 72h4v4h-4zM28 72h4v4h-4zM32 72h4v4h-4zM36 72h4v4h-4zM40 72h4v4h-4zM44 72h4v4h-4zM52 72h4v4h-4zM56 72h4v4h-4zM64 72h4v4h-4zM68 72h4v4h-4zM72 72h4v4h-4zM92 72h4v4h-4zM108 72h4v4h-4zM112 72h4v4h-4zM120 72h4v4h-4zM128 72h4v4h-4zM136 72h4v4h-4zM144 72h4v4h-4zM152 72h4v4h-4zM12 76h4v4h-4zM16 76h4v4h-4zM40 76h4v4h-4zM48 76h4v4h-4zM60 76h4v4h-4zM68 76h4v4h-4zM76 76h4v4h-4zM80 76h4v4h-4zM88 76h4v4h-4zM96 76h4v4h-4zM104 76h4v4h-4zM108 76h4v4h-4zM124 76h4v4h-4zM132 76h4v4h-4zM140 76h4v4h-4zM148 76h4v4h-4zM28 80h4v4h-4zM32 80h4v4h-4zM36 80h4v4h-4zM44 80h4v4h-4zM52 80h4v4h-4zM64 80h4v4h-4zM68 80h4v4h-4zM72 80h4v4h-4zM76 80h4v4h-4zM84 80h4v4h-4zM96 80h4v4h-4zM108 80h4v4h-4zM112 80h4v4h-4zM116 80h4v4h-4zM124 80h4v4h-4zM128 80h4v4h-4zM136 80h4v4h-4zM140 80h4v4h-4zM144 80h4v4h-4zM148 80h4v4h-4zM152 80h4v4h-4zM8 84h4v4h-4zM16 84h4v4h-4zM20 84h4v4h-4zM28 84h4v4h-4zM36 84h4v4h-4zM40 84h4v4h-4zM44 84h4v4h-4zM60 84h4v4h-4zM64 84h4v4h-4zM68 84h4v4h-4zM84 84h4v4h-4zM88 84h4v4h-4zM92 84h4v4h-4zM104 84h4v4h-4zM120 84h4v4h-4zM128 84h4v4h-4zM132 84h4v4h-4zM140 84h4v4h-4zM152 84h4v4h-4zM8 88h4v4h-4zM12 88h4v4h-4zM16 88h4v4h-4zM20 88h4v4h-4zM28 88h4v4h-4zM32 88h4v4h-4zM36 88h4v4h-4zM52 88h4v4h-4zM68 88h4v4h-4zM72 88h4v4h-4zM76 88h4v4h-4zM80 88h4v4h-4zM84 88h4v4h-4zM88 88h4v4h-4zM96 88h4v4h-4zM104 88h4v4h-4zM108 88h4v4h-4zM112 88h4v4h-4zM116 88h4v4h-4zM124 88h4v4h-4zM128 88h4v4h-4zM136 88h4v4h-4zM140 88h4v4h-4zM144 88h4v4h-4zM8 92h4v4h-4zM12 92h4v4h-4zM16 92h4v4h-4zM20 92h4v4h-4zM28 92h4v4h-4zM44 92h4v4h-4zM48 92h4v4h-4zM56 92h4v4h-4zM64 92h4v4h-4zM72 92h4v4h-4zM80 92h4v4h-4zM84 92h4v4h-4zM88 92h4v4h-4zM100 92h4v4h-4zM120 92h4v4h-4zM124 92h4v4h-4zM140 92h4v4h-4zM148 92h4v4h-4zM8 96h4v4h-4zM20 96h4v4h-4zM28 96h4v4h-4zM32 96h4v4h-4zM40 96h4v4h-4zM44 96h4v4h-4zM48 96h4v4h-4zM60 96h4v4h-4zM68 96h4v4h-4zM72 96h4v4h-4zM80 96h4v4h-4zM96 96h4v4h-4zM108 96h4v4h-4zM116 96h4v4h-4zM124 96h4v4h-4zM128 96h4v4h-4zM132 96h4v4h-4zM136 96h4v4h-4zM140 96h4v4h-4zM148 96h4v4h-4zM152 96h4v4h-4zM8 100h4v4h-4zM16 100h4v4h-4zM28 100h4v4h-4zM36 100h4v4h-4zM40 100h4v4h-4zM44 100h4v4h-4zM48 100h4v4h-4zM52 100h4v4h-4zM64 100h4v4h-4zM116 100h4v4h-4zM120 100h4v4h-4zM124 100h4v4h-4zM132 100h4v4h-4zM136 100h4v4h-4zM148 100h4v4h-4zM152 100h4v4h-4zM8 104h4v4h-4zM12 104h4v4h-4zM20 104h4v4h-4zM24 104h4v4h-4zM32 104h4v4h-4zM40 104h4v4h-4zM52 104h4v4h-4zM68 104h4v4h-4zM80 104h4v4h-4zM84 104h4v4h-4zM88 104h4v4h-4zM92 104h4v4h-4zM96 104h4v4h-4zM100 104h4v4h-4zM104 104h4v4h-4zM108 104h4v4h-4zM120 104h4v4h-4zM124 104h4v4h-4zM128 104h4v4h-4zM132 104h4v4h-4zM136 104h4v4h-4zM144 104h4v4h-4zM148 104h4v4h-4zM152 104h4v4h-4zM8 108h4v4h-4zM20 108h4v4h-4zM40 108h4v4h-4zM44 108h4v4h-4zM48 108h4v4h-4zM52 108h4v4h-4zM64 108h4v4h-4zM68 108h4v4h-4zM72 108h4v4h-4zM76 108h4v4h-4zM92 108h4v4h-4zM112 108h4v4h-4zM144 108h4v4h-4zM8 112h4v4h-4zM16 112h4v4h-4zM20 112h4v4h-4zM24 112h4v4h-4zM28 112h4v4h-4zM32 112h4v4h-4zM36 112h4v4h-4zM44 112h4v4h-4zM56 112h4v4h-4zM64 112h4v4h-4zM76 112h4v4h-4zM88 112h4v4h-4zM96 112h4v4h-4zM100 112h4v4h-4zM104 112h4v4h-4zM112 112h4v4h-4zM116 112h4v4h-4zM120 112h4v4h-4zM128 112h4v4h-4zM132 112h4v4h-4zM144 112h4v4h-4zM148 112h4v4h-4zM152 112h4v4h-4zM8 116h4v4h-4zM24 116h4v4h-4zM36 116h4v4h-4zM60 116h4v4h-4zM72 116h4v4h-4zM92 116h4v4h-4zM96 116h4v4h-4zM100 116h4v4h-4zM116 116h4v4h-4zM124 116h4v4h-4zM148 116h4v4h-4zM8 120h4v4h-4zM20 120h4v4h-4zM24 120h4v4h-4zM28 120h4v4h-4zM32 120h4v4h-4zM36 120h4v4h-4zM40 120h4v4h-4zM44 120h4v4h-4zM52 120h4v4h-4zM72 120h4v4h-4zM76 120h4v4h-4zM96 120h4v4h-4zM100 120h4v4h-4zM104 120h4v4h-4zM108 120h4v4h-4zM112 120h4v4h-4zM116 120h4v4h-4zM120 120h4v4h-4zM124 120h4v4h-4zM128 120h4v4h-4zM132 120h4v4h-4zM136 120h4v4h-4zM140 120h4v4h-4zM144 120h4v4h-4zM148 120h4v4h-4zM40 124h4v4h-4zM44 124h4v4h-4zM48 124h4v4h-4zM60 124h4v4h-4zM64 124h4v4h-4zM72 124h4v4h-4zM76 124h4v4h-4zM80 124h4v4h-4zM84 124h4v4h-4zM88 124h4v4h-4zM92 124h4v4h-4zM100 124h4v4h-4zM104 124h4v4h-4zM116 124h4v4h-4zM120 124h4v4h-4zM136 124h4v4h-4zM140 124h4v4h-4zM8 128h4v4h-4zM12 128h4v4h-4zM16 128h4v4h-4zM20 128h4v4h-4zM24 128h4v4h-4zM28 128h4v4h-4zM32 128h4v4h-4zM48 128h4v4h-4zM56 128h4v4h-4zM64 128h4v4h-4zM68 128h4v4h-4zM72 128h4v4h-4zM76 128h4v4h-4zM92 128h4v4h-4zM120 128h4v4h-4zM128 128h4v4h-4zM136 128h4v4h-4zM144 128h4v4h-4zM148 128h4v4h-4zM152 128h4v4h-4zM8 132h4v4h-4zM32 132h4v4h-4zM40 132h4v4h-4zM44 132h4v4h-4zM72 132h4v4h-4zM76 132h4v4h-4zM80 132h4v4h-4zM88 132h4v4h-4zM92 132h4v4h-4zM96 132h4v4h-4zM100 132h4v4h-4zM104 132h4v4h-4zM112 132h4v4h-4zM120 132h4v4h-4zM136 132h4v4h-4zM140 132h4v4h-4zM148 132h4v4h-4zM152 132h4v4h-4zM8 136h4v4h-4zM16 136h4v4h-4zM20 136h4v4h-4zM24 136h4v4h-4zM32 136h4v4h-4zM40 136h4v4h-4zM44 136h4v4h-4zM48 136h4v4h-4zM72 136h4v4h-4zM92 136h4v4h-4zM104 136h4v4h-4zM108 136h4v4h-4zM116 136h4v4h-4zM120 136h4v4h-4zM124 136h4v4h-4zM128 136h4v4h-4zM132 136h4v4h-4zM136 136h4v4h-4zM144 136h4v4h-4zM8 140h4v4h-4zM16 140h4v4h-4zM20 140h4v4h-4zM24 140h4v4h-4zM32 140h4v4h-4zM40 140h4v4h-4zM44 140h4v4h-4zM48 140h4v4h-4zM52 140h4v4h-4zM56 140h4v4h-4zM68 140h4v4h-4zM80 140h4v4h-4zM88 140h4v4h-4zM96 140h4v4h-4zM104 140h4v4h-4zM108 140h4v4h-4zM112 140h4v4h-4zM124 140h4v4h-4zM128 140h4v4h-4zM136 140h4v4h-4zM140 140h4v4h-4zM148 140h4v4h-4zM8 144h4v4h-4zM16 144h4v4h-4zM20 144h4v4h-4zM24 144h4v4h-4zM32 144h4v4h-4zM40 144h4v4h-4zM56 144h4v4h-4zM64 144h4v4h-4zM68 144h4v4h-4zM72 144h4v4h-4zM84 144h4v4h-4zM92 144h4v4h-4zM104 144h4v4h-4zM116 144h4v4h-4zM140 144h4v4h-4zM144 144h4v4h-4zM152 144h4v4h-4zM8 148h4v4h-4zM32 148h4v4h-4zM44 148h4v4h-4zM48 148h4v4h-4zM68 148h4v4h-4zM80 148h4v4h-4zM84 148h4v4h-4zM88 148h4v4h-4zM92 148h4v4h-4zM96 148h4v4h-4zM112 148h4v4h-4zM120 148h4v4h-4zM128 148h4v4h-4zM136 148h4v4h-4zM152 148h4v4h-4zM8 152h4v4h-4zM12 152h4v4h-4zM16 152h4v4h-4zM20 152h4v4h-4zM24 152h4v4h-4zM28 152h4v4h-4zM32 152h4v4h-4zM40 152h4v4h-4zM48 152h4v4h-4zM52 152h4v4h-4zM68 152h4v4h-4zM76 152h4v4h-4zM84 152h4v4h-4zM88 152h4v4h-4zM96 152h4v4h-4zM108 152h4v4h-4zM112 152h4v4h-4zM116 152h4v4h-4zM124 152h4v4h-4zM128 152h4v4h-4zM136 152h4v4h-4zM140 152h4v4h-4zM144 152h4v4h-4zM148 152h4v4h-4zM152 152h4v4h-4z" fill="#2A0A36"/></svg></div>
+    <div class="qrbox" id="qrbox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 164" width="164" height="164" role="img" aria-label="QR code linking to the verification receipt"><rect width="164" height="164" fill="#ffffff"/><path d="M8 8h4v4h-4zM12 8h4v4h-4zM16 8h4v4h-4zM20 8h4v4h-4zM24 8h4v4h-4zM28 8h4v4h-4zM32 8h4v4h-4zM56 8h4v4h-4zM60 8h4v4h-4zM64 8h4v4h-4zM68 8h4v4h-4zM72 8h4v4h-4zM76 8h4v4h-4zM80 8h4v4h-4zM88 8h4v4h-4zM96 8h4v4h-4zM104 8h4v4h-4zM108 8h4v4h-4zM112 8h4v4h-4zM128 8h4v4h-4zM132 8h4v4h-4zM136 8h4v4h-4zM140 8h4v4h-4zM144 8h4v4h-4zM148 8h4v4h-4zM152 8h4v4h-4zM8 12h4v4h-4zM32 12h4v4h-4zM44 12h4v4h-4zM48 12h4v4h-4zM52 12h4v4h-4zM72 12h4v4h-4zM76 12h4v4h-4zM84 12h4v4h-4zM92 12h4v4h-4zM116 12h4v4h-4zM128 12h4v4h-4zM152 12h4v4h-4zM8 16h4v4h-4zM16 16h4v4h-4zM20 16h4v4h-4zM24 16h4v4h-4zM32 16h4v4h-4zM40 16h4v4h-4zM48 16h4v4h-4zM72 16h4v4h-4zM80 16h4v4h-4zM84 16h4v4h-4zM88 16h4v4h-4zM92 16h4v4h-4zM96 16h4v4h-4zM104 16h4v4h-4zM116 16h4v4h-4zM128 16h4v4h-4zM136 16h4v4h-4zM140 16h4v4h-4zM144 16h4v4h-4zM152 16h4v4h-4zM8 20h4v4h-4zM16 20h4v4h-4zM20 20h4v4h-4zM24 20h4v4h-4zM32 20h4v4h-4zM40 20h4v4h-4zM44 20h4v4h-4zM52 20h4v4h-4zM56 20h4v4h-4zM60 20h4v4h-4zM64 20h4v4h-4zM72 20h4v4h-4zM76 20h4v4h-4zM84 20h4v4h-4zM96 20h4v4h-4zM104 20h4v4h-4zM108 20h4v4h-4zM112 20h4v4h-4zM116 20h4v4h-4zM128 20h4v4h-4zM136 20h4v4h-4zM140 20h4v4h-4zM144 20h4v4h-4zM152 20h4v4h-4zM8 24h4v4h-4zM16 24h4v4h-4zM20 24h4v4h-4zM24 24h4v4h-4zM32 24h4v4h-4zM40 24h4v4h-4zM48 24h4v4h-4zM56 24h4v4h-4zM60 24h4v4h-4zM64 24h4v4h-4zM80 24h4v4h-4zM84 24h4v4h-4zM96 24h4v4h-4zM100 24h4v4h-4zM120 24h4v4h-4zM128 24h4v4h-4zM136 24h4v4h-4zM140 24h4v4h-4zM144 24h4v4h-4zM152 24h4v4h-4zM8 28h4v4h-4zM32 28h4v4h-4zM40 28h4v4h-4zM48 28h4v4h-4zM64 28h4v4h-4zM80 28h4v4h-4zM96 28h4v4h-4zM104 28h4v4h-4zM108 28h4v4h-4zM116 28h4v4h-4zM120 28h4v4h-4zM128 28h4v4h-4zM152 28h4v4h-4zM8 32h4v4h-4zM12 32h4v4h-4zM16 32h4v4h-4zM20 32h4v4h-4zM24 32h4v4h-4zM28 32h4v4h-4zM32 32h4v4h-4zM40 32h4v4h-4zM48 32h4v4h-4zM56 32h4v4h-4zM64 32h4v4h-4zM72 32h4v4h-4zM80 32h4v4h-4zM88 32h4v4h-4zM96 32h4v4h-4zM104 32h4v4h-4zM112 32h4v4h-4zM120 32h4v4h-4zM128 32h4v4h-4zM132 32h4v4h-4zM136 32h4v4h-4zM140 32h4v4h-4zM144 32h4v4h-4zM148 32h4v4h-4zM152 32h4v4h-4zM40 36h4v4h-4zM44 36h4v4h-4zM60 36h4v4h-4zM72 36h4v4h-4zM84 36h4v4h-4zM112 36h4v4h-4zM120 36h4v4h-4zM8 40h4v4h-4zM16 40h4v4h-4zM20 40h4v4h-4zM24 40h4v4h-4zM28 40h4v4h-4zM32 40h4v4h-4zM48 40h4v4h-4zM80 40h4v4h-4zM88 40h4v4h-4zM92 40h4v4h-4zM96 40h4v4h-4zM100 40h4v4h-4zM104 40h4v4h-4zM108 40h4v4h-4zM120 40h4v4h-4zM128 40h4v4h-4zM132 40h4v4h-4zM136 40h4v4h-4zM140 40h4v4h-4zM144 40h4v4h-4zM8 44h4v4h-4zM12 44h4v4h-4zM44 44h4v4h-4zM48 44h4v4h-4zM52 44h4v4h-4zM60 44h4v4h-4zM64 44h4v4h-4zM68 44h4v4h-4zM72 44h4v4h-4zM76 44h4v4h-4zM92 44h4v4h-4zM112 44h4v4h-4zM124 44h4v4h-4zM144 44h4v4h-4zM148 44h4v4h-4zM8 48h4v4h-4zM12 48h4v4h-4zM24 48h4v4h-4zM32 48h4v4h-4zM36 48h4v4h-4zM44 48h4v4h-4zM48 48h4v4h-4zM64 48h4v4h-4zM80 48h4v4h-4zM88 48h4v4h-4zM92 48h4v4h-4zM100 48h4v4h-4zM104 48h4v4h-4zM116 48h4v4h-4zM120 48h4v4h-4zM128 48h4v4h-4zM136 48h4v4h-4zM144 48h4v4h-4zM148 48h4v4h-4zM152 48h4v4h-4zM8 52h4v4h-4zM12 52h4v4h-4zM16 52h4v4h-4zM24 52h4v4h-4zM28 52h4v4h-4zM36 52h4v4h-4zM40 52h4v4h-4zM44 52h4v4h-4zM52 52h4v4h-4zM56 52h4v4h-4zM60 52h4v4h-4zM64 52h4v4h-4zM72 52h4v4h-4zM92 52h4v4h-4zM100 52h4v4h-4zM112 52h4v4h-4zM120 52h4v4h-4zM124 52h4v4h-4zM128 52h4v4h-4zM132 52h4v4h-4zM152 52h4v4h-4zM24 56h4v4h-4zM32 56h4v4h-4zM36 56h4v4h-4zM40 56h4v4h-4zM56 56h4v4h-4zM60 56h4v4h-4zM64 56h4v4h-4zM76 56h4v4h-4zM100 56h4v4h-4zM104 56h4v4h-4zM108 56h4v4h-4zM112 56h4v4h-4zM116 56h4v4h-4zM124 56h4v4h-4zM128 56h4v4h-4zM136 56h4v4h-4zM144 56h4v4h-4zM148 56h4v4h-4zM152 56h4v4h-4zM8 60h4v4h-4zM12 60h4v4h-4zM16 60h4v4h-4zM28 60h4v4h-4zM40 60h4v4h-4zM56 60h4v4h-4zM60 60h4v4h-4zM72 60h4v4h-4zM76 60h4v4h-4zM80 60h4v4h-4zM84 60h4v4h-4zM88 60h4v4h-4zM92 60h4v4h-4zM100 60h4v4h-4zM120 60h4v4h-4zM132 60h4v4h-4zM8 64h4v4h-4zM12 64h4v4h-4zM24 64h4v4h-4zM28 64h4v4h-4zM32 64h4v4h-4zM36 64h4v4h-4zM40 64h4v4h-4zM52 64h4v4h-4zM68 64h4v4h-4zM72 64h4v4h-4zM76 64h4v4h-4zM88 64h4v4h-4zM92 64h4v4h-4zM104 64h4v4h-4zM108 64h4v4h-4zM116 64h4v4h-4zM120 64h4v4h-4zM124 64h4v4h-4zM128 64h4v4h-4zM132 64h4v4h-4zM136 64h4v4h-4zM140 64h4v4h-4zM152 64h4v4h-4zM24 68h4v4h-4zM44 68h4v4h-4zM48 68h4v4h-4zM52 68h4v4h-4zM60 68h4v4h-4zM76 68h4v4h-4zM80 68h4v4h-4zM88 68h4v4h-4zM92 68h4v4h-4zM96 68h4v4h-4zM100 68h4v4h-4zM104 68h4v4h-4zM116 68h4v4h-4zM120 68h4v4h-4zM124 68h4v4h-4zM128 68h4v4h-4zM132 68h4v4h-4zM136 68h4v4h-4zM8 72h4v4h-4zM28 72h4v4h-4zM32 72h4v4h-4zM36 72h4v4h-4zM40 72h4v4h-4zM44 72h4v4h-4zM52 72h4v4h-4zM56 72h4v4h-4zM64 72h4v4h-4zM68 72h4v4h-4zM72 72h4v4h-4zM92 72h4v4h-4zM108 72h4v4h-4zM112 72h4v4h-4zM120 72h4v4h-4zM128 72h4v4h-4zM136 72h4v4h-4zM144 72h4v4h-4zM152 72h4v4h-4zM12 76h4v4h-4zM16 76h4v4h-4zM40 76h4v4h-4zM48 76h4v4h-4zM60 76h4v4h-4zM68 76h4v4h-4zM76 76h4v4h-4zM80 76h4v4h-4zM88 76h4v4h-4zM96 76h4v4h-4zM104 76h4v4h-4zM108 76h4v4h-4zM124 76h4v4h-4zM132 76h4v4h-4zM140 76h4v4h-4zM148 76h4v4h-4zM28 80h4v4h-4zM32 80h4v4h-4zM36 80h4v4h-4zM44 80h4v4h-4zM52 80h4v4h-4zM64 80h4v4h-4zM68 80h4v4h-4zM72 80h4v4h-4zM76 80h4v4h-4zM84 80h4v4h-4zM96 80h4v4h-4zM108 80h4v4h-4zM112 80h4v4h-4zM116 80h4v4h-4zM124 80h4v4h-4zM128 80h4v4h-4zM136 80h4v4h-4zM140 80h4v4h-4zM144 80h4v4h-4zM148 80h4v4h-4zM152 80h4v4h-4zM8 84h4v4h-4zM16 84h4v4h-4zM20 84h4v4h-4zM28 84h4v4h-4zM36 84h4v4h-4zM40 84h4v4h-4zM44 84h4v4h-4zM60 84h4v4h-4zM64 84h4v4h-4zM68 84h4v4h-4zM84 84h4v4h-4zM88 84h4v4h-4zM92 84h4v4h-4zM104 84h4v4h-4zM120 84h4v4h-4zM128 84h4v4h-4zM132 84h4v4h-4zM140 84h4v4h-4zM152 84h4v4h-4zM8 88h4v4h-4zM12 88h4v4h-4zM16 88h4v4h-4zM20 88h4v4h-4zM28 88h4v4h-4zM32 88h4v4h-4zM36 88h4v4h-4zM52 88h4v4h-4zM68 88h4v4h-4zM72 88h4v4h-4zM76 88h4v4h-4zM80 88h4v4h-4zM84 88h4v4h-4zM88 88h4v4h-4zM96 88h4v4h-4zM104 88h4v4h-4zM108 88h4v4h-4zM112 88h4v4h-4zM116 88h4v4h-4zM124 88h4v4h-4zM128 88h4v4h-4zM136 88h4v4h-4zM140 88h4v4h-4zM144 88h4v4h-4zM8 92h4v4h-4zM12 92h4v4h-4zM16 92h4v4h-4zM20 92h4v4h-4zM28 92h4v4h-4zM44 92h4v4h-4zM48 92h4v4h-4zM56 92h4v4h-4zM64 92h4v4h-4zM72 92h4v4h-4zM80 92h4v4h-4zM84 92h4v4h-4zM88 92h4v4h-4zM100 92h4v4h-4zM120 92h4v4h-4zM124 92h4v4h-4zM140 92h4v4h-4zM148 92h4v4h-4zM8 96h4v4h-4zM20 96h4v4h-4zM28 96h4v4h-4zM32 96h4v4h-4zM40 96h4v4h-4zM44 96h4v4h-4zM48 96h4v4h-4zM60 96h4v4h-4zM68 96h4v4h-4zM72 96h4v4h-4zM80 96h4v4h-4zM96 96h4v4h-4zM108 96h4v4h-4zM116 96h4v4h-4zM124 96h4v4h-4zM128 96h4v4h-4zM132 96h4v4h-4zM136 96h4v4h-4zM140 96h4v4h-4zM148 96h4v4h-4zM152 96h4v4h-4zM8 100h4v4h-4zM16 100h4v4h-4zM28 100h4v4h-4zM36 100h4v4h-4zM40 100h4v4h-4zM44 100h4v4h-4zM48 100h4v4h-4zM52 100h4v4h-4zM64 100h4v4h-4zM116 100h4v4h-4zM120 100h4v4h-4zM124 100h4v4h-4zM132 100h4v4h-4zM136 100h4v4h-4zM148 100h4v4h-4zM152 100h4v4h-4zM8 104h4v4h-4zM12 104h4v4h-4zM20 104h4v4h-4zM24 104h4v4h-4zM32 104h4v4h-4zM40 104h4v4h-4zM52 104h4v4h-4zM68 104h4v4h-4zM80 104h4v4h-4zM84 104h4v4h-4zM88 104h4v4h-4zM92 104h4v4h-4zM96 104h4v4h-4zM100 104h4v4h-4zM104 104h4v4h-4zM108 104h4v4h-4zM120 104h4v4h-4zM124 104h4v4h-4zM128 104h4v4h-4zM132 104h4v4h-4zM136 104h4v4h-4zM144 104h4v4h-4zM148 104h4v4h-4zM152 104h4v4h-4zM8 108h4v4h-4zM20 108h4v4h-4zM40 108h4v4h-4zM44 108h4v4h-4zM48 108h4v4h-4zM52 108h4v4h-4zM64 108h4v4h-4zM68 108h4v4h-4zM72 108h4v4h-4zM76 108h4v4h-4zM92 108h4v4h-4zM112 108h4v4h-4zM144 108h4v4h-4zM8 112h4v4h-4zM16 112h4v4h-4zM20 112h4v4h-4zM24 112h4v4h-4zM28 112h4v4h-4zM32 112h4v4h-4zM36 112h4v4h-4zM44 112h4v4h-4zM56 112h4v4h-4zM64 112h4v4h-4zM76 112h4v4h-4zM88 112h4v4h-4zM96 112h4v4h-4zM100 112h4v4h-4zM104 112h4v4h-4zM112 112h4v4h-4zM116 112h4v4h-4zM120 112h4v4h-4zM128 112h4v4h-4zM132 112h4v4h-4zM144 112h4v4h-4zM148 112h4v4h-4zM152 112h4v4h-4zM8 116h4v4h-4zM24 116h4v4h-4zM36 116h4v4h-4zM60 116h4v4h-4zM72 116h4v4h-4zM92 116h4v4h-4zM96 116h4v4h-4zM100 116h4v4h-4zM116 116h4v4h-4zM124 116h4v4h-4zM148 116h4v4h-4zM8 120h4v4h-4zM20 120h4v4h-4zM24 120h4v4h-4zM28 120h4v4h-4zM32 120h4v4h-4zM36 120h4v4h-4zM40 120h4v4h-4zM44 120h4v4h-4zM52 120h4v4h-4zM72 120h4v4h-4zM76 120h4v4h-4zM96 120h4v4h-4zM100 120h4v4h-4zM104 120h4v4h-4zM108 120h4v4h-4zM112 120h4v4h-4zM116 120h4v4h-4zM120 120h4v4h-4zM124 120h4v4h-4zM128 120h4v4h-4zM132 120h4v4h-4zM136 120h4v4h-4zM140 120h4v4h-4zM144 120h4v4h-4zM148 120h4v4h-4zM40 124h4v4h-4zM44 124h4v4h-4zM48 124h4v4h-4zM60 124h4v4h-4zM64 124h4v4h-4zM72 124h4v4h-4zM76 124h4v4h-4zM80 124h4v4h-4zM84 124h4v4h-4zM88 124h4v4h-4zM92 124h4v4h-4zM100 124h4v4h-4zM104 124h4v4h-4zM116 124h4v4h-4zM120 124h4v4h-4zM136 124h4v4h-4zM140 124h4v4h-4zM8 128h4v4h-4zM12 128h4v4h-4zM16 128h4v4h-4zM20 128h4v4h-4zM24 128h4v4h-4zM28 128h4v4h-4zM32 128h4v4h-4zM48 128h4v4h-4zM56 128h4v4h-4zM64 128h4v4h-4zM68 128h4v4h-4zM72 128h4v4h-4zM76 128h4v4h-4zM92 128h4v4h-4zM120 128h4v4h-4zM128 128h4v4h-4zM136 128h4v4h-4zM144 128h4v4h-4zM148 128h4v4h-4zM152 128h4v4h-4zM8 132h4v4h-4zM32 132h4v4h-4zM40 132h4v4h-4zM44 132h4v4h-4zM72 132h4v4h-4zM76 132h4v4h-4zM80 132h4v4h-4zM88 132h4v4h-4zM92 132h4v4h-4zM96 132h4v4h-4zM100 132h4v4h-4zM104 132h4v4h-4zM112 132h4v4h-4zM120 132h4v4h-4zM136 132h4v4h-4zM140 132h4v4h-4zM148 132h4v4h-4zM152 132h4v4h-4zM8 136h4v4h-4zM16 136h4v4h-4zM20 136h4v4h-4zM24 136h4v4h-4zM32 136h4v4h-4zM40 136h4v4h-4zM44 136h4v4h-4zM48 136h4v4h-4zM72 136h4v4h-4zM92 136h4v4h-4zM104 136h4v4h-4zM108 136h4v4h-4zM116 136h4v4h-4zM120 136h4v4h-4zM124 136h4v4h-4zM128 136h4v4h-4zM132 136h4v4h-4zM136 136h4v4h-4zM144 136h4v4h-4zM8 140h4v4h-4zM16 140h4v4h-4zM20 140h4v4h-4zM24 140h4v4h-4zM32 140h4v4h-4zM40 140h4v4h-4zM44 140h4v4h-4zM48 140h4v4h-4zM52 140h4v4h-4zM56 140h4v4h-4zM68 140h4v4h-4zM80 140h4v4h-4zM88 140h4v4h-4zM96 140h4v4h-4zM104 140h4v4h-4zM108 140h4v4h-4zM112 140h4v4h-4zM124 140h4v4h-4zM128 140h4v4h-4zM136 140h4v4h-4zM140 140h4v4h-4zM148 140h4v4h-4zM8 144h4v4h-4zM16 144h4v4h-4zM20 144h4v4h-4zM24 144h4v4h-4zM32 144h4v4h-4zM40 144h4v4h-4zM56 144h4v4h-4zM64 144h4v4h-4zM68 144h4v4h-4zM72 144h4v4h-4zM84 144h4v4h-4zM92 144h4v4h-4zM104 144h4v4h-4zM116 144h4v4h-4zM140 144h4v4h-4zM144 144h4v4h-4zM152 144h4v4h-4zM8 148h4v4h-4zM32 148h4v4h-4zM44 148h4v4h-4zM48 148h4v4h-4zM68 148h4v4h-4zM80 148h4v4h-4zM84 148h4v4h-4zM88 148h4v4h-4zM92 148h4v4h-4zM96 148h4v4h-4zM112 148h4v4h-4zM120 148h4v4h-4zM128 148h4v4h-4zM136 148h4v4h-4zM152 148h4v4h-4zM8 152h4v4h-4zM12 152h4v4h-4zM16 152h4v4h-4zM20 152h4v4h-4zM24 152h4v4h-4zM28 152h4v4h-4zM32 152h4v4h-4zM40 152h4v4h-4zM48 152h4v4h-4zM52 152h4v4h-4zM68 152h4v4h-4zM76 152h4v4h-4zM84 152h4v4h-4zM88 152h4v4h-4zM96 152h4v4h-4zM108 152h4v4h-4zM112 152h4v4h-4zM116 152h4v4h-4zM124 152h4v4h-4zM128 152h4v4h-4zM136 152h4v4h-4zM140 152h4v4h-4zM144 152h4v4h-4zM148 152h4v4h-4zM152 152h4v4h-4z" fill="#581970"/></svg></div>
     <div>
       <h3>Receipt ba6f57a167032b14</h3>
       <p>This one is real. It was produced by the tool from the bundle it links to.</p>
@@ -162,19 +163,30 @@
     </div>
   </div>
   <p class="note" style="margin-top:22px">
-    Generating a receipt is free and local. Hosting it at a link that stays up, and signing it, is
-    what the Team plan is for. Receipts already issued keep working whether or not you are still
-    paying: holding a customer's compliance hostage is not a business we want.
+    Generating a receipt is free and local, and it always will be. Hosting receipts at links that
+    stay up for the life of the product, and signing them, is work we have not built yet. When we
+    do, receipts already issued will keep verifying whether or not anyone is still paying: holding
+    a customer's compliance hostage is not a business we want.
   </p>
 </section>
 
 <section>
-  <h2>What we can see, which is nothing</h2>
+  <h2>What we can see, and how anything would ever leave your machine</h2>
   <p class="col">
-    Dossier has no telemetry, no account and no network code. We cannot count installs,
-    read your gate results or tell whether you are using it at all. A tool that reads the
-    output of your analyser has no business reporting it to anyone, and the source is open
-    so you do not have to take our word for it.
+    Dossier has no telemetry and no account. We cannot count installs, read your gate
+    results or tell whether you are using it at all. A tool that reads the output of your
+    analyser has no business reporting it to anyone, and the source is open so you do not
+    have to take our word for it.
+  </p>
+  <p class="col">
+    If a command is ever added that uploads something — registering a receipt hash so a
+    link resolves, say — it will be a command of its own, it will print the exact content
+    before sending it, it will do nothing until you type yes, and it will carry hashes and
+    dates and nothing else. Saying no will leave a fully working tool. Those terms are
+    written down in
+    <a href="https://github.com/adsalmohandis-blip/dossier/blob/main/RECEIPTS.md">RECEIPTS.md</a>,
+    and a test fails the build if any module in the tool can open a socket without being
+    named there first.
   </p>
   <p class="col">
     That leaves us with no way to learn what is worth building, so there is one command for
@@ -211,27 +223,28 @@
 </div>
 </main>
 <footer>
-  <div class="sheet">
-    <div class="sig">
-      <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS" style="justify-self:start">
-        <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-      </a>
-      <div>Dossier is a product of ADMIT NEXUS, a brand of Al-Khawarizmi for Technological and
-      Information Systems. <a href="https://admitnexus.com">admitnexus.com</a></div>
+  <div class="in">
+    <div class="row">
+      <a href="https://admitnexus.com">admitnexus.com</a><span class="sep">·</span>
+      <a href="mailto:info@admitnexus.com">info@admitnexus.com</a><span class="sep">·</span>
+      <a href="../index.html">Home</a><span class="sep">·</span>
+      <a href="../how-it-works/">How it works</a><span class="sep">·</span>
+      <a href="../pricing/">Price</a><span class="sep">·</span>
+      <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>
     </div>
     <div class="cols">
-      <div>Dossier 0.1.0, schema <span class="mono">dossier.evidence/v0</span>. Source on
-        <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>, MIT licensed.
-        <a href="../index.html">Home</a> ·
-        <a href="../how-it-works/">How it works</a> ·
-        <a href="../pricing/">Price</a></div>
-      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations cited
-        here come from the Product Liability Directive (EU) 2024/2853 and the Cyber Resilience Act
-        (EU) 2024/2847; check them against the official texts for your own product.</div>
+      <div>Dossier is a product of ADMIT NEXUS. Version 0.1.0, schema
+        <span class="mono">dossier.evidence/v0</span>, MIT licensed.</div>
+      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations
+        cited here come from the Product Liability Directive (EU) 2024/2853 and the Cyber
+        Resilience Act (EU) 2024/2847; check them against the official texts for your own product.</div>
     </div>
-    <div class="rtl" lang="ar">© 2026 ADMIT NEXUS. جميع الحقوق محفوظة.</div>
+    <div class="copyright">© 2026 ADMIT NEXUS. All rights reserved.</div>
   </div>
 </footer>
 <script src="../assets/site.js"></script>
+<!-- MUSA, ADMIT's assistant. Served from admitnexus.com; deferred so a slow
+     or unreachable host cannot hold up the page. -->
+<script src="https://musa.admitnexus.com/api/v1/embed/dossier.js" defer></script>
 </body>
 </html>

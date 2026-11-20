@@ -113,8 +113,9 @@ Signing, the public verification page and the transparency log are not in this r
 
 ## What we can see
 
-Nothing. Dossier has no telemetry, no account and no network code, and the source is here
-so you do not have to take that on trust.
+Nothing. Dossier has no telemetry and no account, and nothing is uploaded unless you run a
+command whose whole job is to upload. The source is here so you do not have to take that
+on trust.
 
 That leaves no way to learn what is worth building, so there is one command for it:
 
@@ -126,12 +127,22 @@ It writes a single file of counts — which gates you turned on, how many passed
 toolchain was detected, how many decisions were recorded — prints every line to your
 terminal before writing it, and **sends nothing anywhere**. No file names, no hashes, no
 company or product names, no coverage figures, no names of people who approved. Read it,
-and mail it to `dossier@admitnexus.com` only if you are happy with what it says. The tool
+and mail it to `info@admitnexus.com` only if you are happy with what it says. The tool
 behaves identically whether you do or not.
 
 The report is assembled from a fixed list of derived numbers rather than by filtering your
 event log, so a field added to Dossier in a later version cannot reach a report by
 accident. `tests/report.test.js` asserts exactly that.
+
+## The rule about uploading
+
+Dossier uploads nothing unless you ask for it by name, and `tests/promise.test.js` fails
+the build if any module under `src/` so much as requires a network module without being
+named in that test's allowlist first. If a future version ever needs to
+register a receipt hash so a link resolves, [RECEIPTS.md](RECEIPTS.md) sets out the only
+terms on which that may happen: a command of its own, the exact content shown before it is
+sent, a typed yes with no as the default, hashes and dates only, and a tool that still
+works fully if you decline.
 
 ## Price
 

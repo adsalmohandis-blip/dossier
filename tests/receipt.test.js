@@ -82,6 +82,22 @@ test("a failed gate is visible in the status", () => {
   if (html.includes("41.73")) throw new Error("receipt leaked the measured value");
 });
 
+test("a receipt with nowhere to live carries no QR code and no link", () => {
+  const html = receipt.toHtml(SEALED, {});
+  if (html.includes("<svg")) throw new Error("drew a QR code with no destination");
+  if (/https?:\/\/[^"]*\/r\//.test(html)) throw new Error("invented a link");
+  if (!/not published anywhere/.test(html)) throw new Error("did not say it is unpublished");
+  if (receipt.facts(SEALED, {}).url !== null) throw new Error("facts.url should be null");
+});
+
+test("a QR code appears only once a base URL is given", () => {
+  const html = receipt.toHtml(SEALED, { urlBase: "https://example.test/r" });
+  if (!html.includes("<svg")) throw new Error("no QR code for a real destination");
+  if (!html.includes(`https://example.test/r/${SEALED.bundle_hash.slice(0, 16)}`)) {
+    throw new Error("the link does not match the hash");
+  }
+});
+
 test("the permanent link is derived from the hash, not chosen", () => {
   const url = receipt.urlFor(SEALED, "https://example.test/r");
   if (url !== `https://example.test/r/${SEALED.bundle_hash.slice(0, 16)}`) throw new Error(`unexpected url: ${url}`);

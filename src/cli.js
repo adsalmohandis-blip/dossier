@@ -55,7 +55,7 @@ Usage
   dossier doctor [--json]
 
 Dossier records. It does not generate code, analyse code, build SBOMs or grant certification.
-Everything runs locally. Nothing is sent anywhere.
+Everything runs on your machine. Nothing is uploaded unless you ask for it by name.
 `;
 
 function cmdInit(args) {
@@ -258,17 +258,33 @@ function cmdReceipt(args) {
   const htmlFile = path.join(outDir, `${facts.prefix}.html`);
   fs.writeFileSync(htmlFile, html, "utf8");
 
-  out(args.flags, [
+  const lines = [
     `Receipt written for ${facts.prefix}`,
     `  ${htmlFile}`,
-    `Permanent link: ${facts.url}`,
     facts.self_consistent
       ? "The bundle matches its hash."
       : `WARNING — the bundle does not match its hash (${facts.inconsistency}).`,
-    "",
-    "This receipt is a record, not a certificate. Host it yourself, or publish it",
-    "at the permanent link with a Team plan."
-  ], { ...facts, file: htmlFile });
+    ""
+  ];
+  if (facts.url) {
+    lines.push(
+      `Link: ${facts.url}`,
+      "",
+      "That link is yours to serve. Put this file where it resolves before you",
+      "print the receipt or hand it to anyone: a QR code that leads nowhere makes",
+      "a true record look forged."
+    );
+  } else {
+    lines.push(
+      "No link and no QR code, because you have not said where this will be hosted.",
+      "",
+      "Pass --url-base=https://your.site/receipts once you know, and the receipt",
+      "will carry a QR code pointing at it. Until then the receipt still works:",
+      "anyone with the bundle can recompute its hash and compare."
+    );
+  }
+  lines.push("", "A receipt is a record, not a certificate.");
+  out(args.flags, lines, { ...facts, file: htmlFile });
 
   if (!facts.self_consistent) process.exitCode = 1;
 }
@@ -289,7 +305,7 @@ function cmdReport(args) {
     "",
     "Nothing has been sent anywhere. If you want to help us work out which",
     "parts of this are worth building, attach that file to an email to",
-    "dossier@admitnexus.com. If you would rather not, delete it and carry on;",
+    "info@admitnexus.com. If you would rather not, delete it and carry on;",
     "the tool behaves identically either way."
   ], built);
 }

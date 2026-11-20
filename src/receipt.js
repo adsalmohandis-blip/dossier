@@ -19,7 +19,16 @@ const path = require("path");
 const qr = require("./qr");
 const bundleModule = require("./bundle");
 
-const DEFAULT_URL_BASE = "https://admitnexus.com/dossier/r/";
+// There is deliberately no default. A QR code that resolves to nothing is
+// worse than no QR code at all: on a printed technical file it makes a true
+// record look forged. A receipt carries a link only when the person running
+// the command has said where they are going to host it.
+const DEFAULT_URL_BASE = null;
+
+// The approved ADMIT header logo, shipped with the tool so a receipt stays
+// self-contained. It is white and orange on brand purple and carries no
+// transparency, so it is placed on the purple band it was drawn for.
+const BRAND_LOGO = path.join(__dirname, "assets", "admit-logo.png");
 
 function prefixOf(bundle) {
   if (!bundle || typeof bundle.bundle_hash !== "string" || bundle.bundle_hash.length < 16) {
@@ -28,8 +37,20 @@ function prefixOf(bundle) {
   return bundle.bundle_hash.slice(0, 16);
 }
 
+// Hosts we would have to be running a service to serve. We are not, so a
+// receipt pointing at one of them would be a QR code leading to nothing.
+const UNSERVED = /^https?:\/\/(?:[a-z0-9-]+\.)*admitnexus\.com(?::\d+)?\//i;
+
 function urlFor(bundle, urlBase) {
-  const base = (urlBase || DEFAULT_URL_BASE).replace(/\/+$/, "");
+  if (!urlBase) return null;
+  const base = String(urlBase).replace(/\/+$/, "");
+  if (UNSERVED.test(`${base}/`)) {
+    throw new Error(
+      `We do not host receipts yet, so ${base} would not resolve and the QR code ` +
+      "would lead nowhere. Point --url-base at somewhere you control, or leave it " +
+      "out and the receipt will carry no link."
+    );
+  }
   return `${base}/${prefixOf(bundle)}`;
 }
 
@@ -98,14 +119,26 @@ function day(iso) {
 function toHtml(bundle, options = {}) {
   const f = facts(bundle, options);
   const esc = qr.escapeXml;
-  const code = qr.encode(f.url);
-  const svg = qr.toSvg(code, {
-    scale: 4,
-    quiet: 2,
-    dark: "#2A0A36",
-    light: "#ffffff",
-    label: `QR code linking to ${f.url}`,
-  });
+  const link = f.url
+    ? (() => {
+        const code = qr.encode(f.url);
+        const svg = qr.toSvg(code, {
+          scale: 4,
+          quiet: 2,
+          dark: "#2A0A36",
+          light: "#ffffff",
+          label: `QR code linking to ${f.url}`,
+        });
+        return `<div class="qr">
+    ${svg}
+    <div class="t">Scan or open<br><a href="${esc(f.url)}">${esc(f.url)}</a></div>
+  </div>`;
+      })()
+    : `<div class="qr nolink">
+    <div class="t">This receipt is not published anywhere. Check it by recomputing the
+    hash of your copy of the bundle, or host this page yourself and reissue it with
+    <code>--url-base</code>.</div>
+  </div>`;
 
   const ok = f.self_consistent && f.gates_all_passed;
   const status = f.self_consistent
@@ -130,9 +163,15 @@ function toHtml(bundle, options = {}) {
   ];
   if (f.organisation) rows.unshift(["Organisation", esc(f.organisation)]);
 
-  const plate = options.logo
-    ? `<img class="logo" src="${esc(inlineLogo(options.logo))}" alt="ADMIT NEXUS">`
-    : `<div class="plate"><span>ADMIT NEXUS</span></div>`;
+  let plate = `<span class="wordmark">ADMIT</span>`;
+  const logoFile = options.logo || (fs.existsSync(BRAND_LOGO) ? BRAND_LOGO : null);
+  if (logoFile) {
+    try {
+      plate = `<img class="logo" src="${esc(inlineLogo(logoFile))}" alt="ADMIT">`;
+    } catch (error) {
+      if (options.logo) throw error; // an explicit choice that fails should say so
+    }
+  }
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -142,78 +181,105 @@ function toHtml(bundle, options = {}) {
 <title>Verification receipt ${esc(f.prefix)} — Dossier</title>
 <meta name="robots" content="noindex">
 <style>
-:root{--admit:#2A0A36;--ink:#2A0A36;--body:#4a3f50;--muted:#7a6d80;--rule:#ded6e2;--ok:#0f6b53;--bad:#9b1c2e}
+/* ADMIT identity, ANX-BRND-TPL-001 V1.1 (approved 19 Nov 2026). */
+:root{
+  --purple:#581970;--orange:#F3AA1F;--canvas:#F7F3F9;--card:#fff;
+  --border:#DED4E3;--tint:#FBF9FC;--divider:#EFE8F2;
+  --ink:#2E2A32;--muted:#6B6470;--on-purple:#E7D9EE;--on-purple-sub:#B79BC6;
+  --ok:#157a5b;--ok-bg:#E8F4EF;--bad:#9b1c2e;--bad-bg:#FBEEF0;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#fbfafc;color:var(--body);
-  font:16px/1.6 "Helvetica Neue",Arial,system-ui,sans-serif}
-.page{max-width:620px;margin:0 auto;padding:36px 24px 64px}
-.plate{display:inline-block;background:#fff;border:1px solid var(--rule);padding:7px 11px}
-.plate span{font-weight:700;font-size:15px;color:var(--admit);letter-spacing:.06em}
-.logo{display:block;height:30px;width:auto}
-h1{color:var(--ink);font-size:23px;font-weight:600;margin:26px 0 4px;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:14px;margin:0 0 24px}
-.card{background:#fff;border:1px solid var(--rule)}
-.bar{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:space-between;align-items:center;
-  padding:12px 16px;border-bottom:1px solid var(--rule)}
-.id{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:var(--muted)}
-.badge{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:700;letter-spacing:.04em;
-  border:1px solid var(--ok);color:var(--ok);background:#eaf4f0;padding:4px 9px}
-.badge.bad{border-color:var(--bad);color:var(--bad);background:#fbeef0}
-dl{margin:0;padding:14px 16px;display:grid;grid-template-columns:max-content minmax(0,1fr);
-  column-gap:20px;row-gap:8px;align-items:baseline;font-size:14px}
-dt{color:var(--muted)}
-dd{margin:0;color:var(--ink);overflow-wrap:anywhere;
-  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+body{margin:0;background:var(--canvas);color:var(--ink);
+  font:16px/1.6 "Segoe UI",system-ui,Arial,Helvetica,sans-serif}
+.page{max-width:640px;margin:26px auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.band{background:var(--purple);border-bottom:3px solid var(--orange);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 22px}
+.band .logo{display:block;height:34px;width:auto}
+.band .wordmark{font-size:19px;font-weight:700;color:#fff;letter-spacing:.06em}
+.band .id{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:11.5px;
+  color:var(--on-purple-sub);text-align:right}
+.body{padding:24px 22px 4px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;
+  font-weight:700;color:var(--orange);margin:0 0 8px}
+h1{color:var(--purple);font-size:24px;line-height:1.2;font-weight:700;margin:0 0 6px}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 20px}
+.status{display:inline-block;font-family:ui-monospace,Consolas,Menlo,monospace;
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:5px 11px;border-radius:4px;
+  border:1px solid var(--ok);color:var(--ok);background:var(--ok-bg);margin-bottom:18px}
+.status.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-bg)}
+dl{margin:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+dl > div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;
+  padding:10px 14px;border-top:1px solid var(--divider);align-items:baseline}
+dl > div:first-child{border-top:0}
+dl > div:nth-child(even){background:var(--tint)}
+dt{color:var(--muted);font-size:12.5px}
+dd{margin:0;color:var(--ink);font-family:ui-monospace,Consolas,Menlo,monospace;
+  font-size:12.5px;overflow-wrap:anywhere}
 .h{word-break:break-all}
-.qr{display:flex;gap:18px;align-items:center;padding:14px 16px;border-top:1px solid var(--rule);flex-wrap:wrap}
-.qr svg{display:block;width:124px;height:124px;border:1px solid var(--rule)}
-.qr .t{font-size:13px;color:var(--muted);max-width:30ch}
-.qr .t a{color:var(--admit);word-break:break-all}
-.limits{margin:26px 0 0;padding:14px 16px;border-left:3px solid var(--admit);background:#f4f0f6;font-size:13.5px}
-.limits b{color:var(--ink)}
-footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
-footer a{color:var(--admit)}
-@media (max-width:520px){dl{grid-template-columns:1fr;row-gap:2px}dd{margin-bottom:8px}}
-@media print{body{background:#fff}.page{max-width:none;padding:0}.card{border-color:#999}}
+.qr{display:flex;gap:18px;align-items:center;margin-top:18px;flex-wrap:wrap;
+  background:var(--tint);border:1px solid var(--border);border-radius:8px;padding:14px}
+.qr svg{display:block;width:120px;height:120px;background:#fff;
+  border:1px solid var(--border);border-radius:6px}
+.qr .t{font-size:13px;color:var(--muted);max-width:32ch}
+.qr .t a{color:var(--purple);word-break:break-all}
+.qr.nolink .t{max-width:48ch}
+.limits{margin:20px 0 22px;padding:15px 18px;border-left:3px solid var(--orange);
+  background:var(--tint);border-radius:0 8px 8px 0;font-size:13.5px}
+.limits b{color:var(--purple)}
+footer{background:var(--purple);color:var(--on-purple-sub);padding:16px 22px;font-size:12px;line-height:1.7}
+footer a{color:#fff}
+@media (max-width:540px){
+  .page{margin:0}.card{border:0;border-radius:0}
+  dl > div{grid-template-columns:1fr;gap:2px}
+  dd{margin-bottom:4px}
+}
+@media print{
+  body{background:#fff}.page{margin:0;max-width:none}
+  .card{border:0;border-radius:0}
+  .band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
 <body>
 <div class="page">
-
-${plate}
-
-<h1>Verification receipt</h1>
-<p class="sub">Dossier · evidence record for AI-assisted firmware</p>
-
 <div class="card">
-  <div class="bar">
-    <span class="id">receipt/${esc(f.prefix)}</span>
-    <span class="badge${ok ? "" : " bad"}">${esc(status)}</span>
+
+  <div class="band">
+    ${plate}
+    <div class="id">VERIFICATION RECEIPT<br>receipt/${esc(f.prefix)}</div>
   </div>
-  <dl>
-${rows.map(([k, v]) => `    <dt>${esc(k)}</dt><dd>${v}</dd>`).join("\n")}
-  </dl>
-  <div class="qr">
-    ${svg}
-    <div class="t">Scan or open<br><a href="${esc(f.url)}">${esc(f.url)}</a></div>
+
+  <div class="body">
+    <p class="eyebrow">Dossier · evidence record for AI-assisted firmware</p>
+    <h1>This file is the file that was recorded.</h1>
+    <p class="sub">Recompute the hash of your copy and compare it with the one below.</p>
+
+    <span class="status${ok ? "" : " bad"}">${esc(status)}</span>
+
+    <dl>
+${rows.map(([k, v]) => `      <div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("\n")}
+    </dl>
+
+    ${link}
+
+    <div class="limits">
+      <b>What this is.</b> A record that the evidence bundle with the hash above is the
+      bundle recorded on the date above, and that its event chain was intact when it was
+      recorded.<br><br>
+      <b>What this is not.</b> Not a certificate, not an approval, and not an assessment of
+      the product. Dossier does not certify anything and does not test firmware. Conformity
+      is decided by you and, where the law requires it, by a notified body.
+    </div>
   </div>
+
+  <footer>
+    Dossier is a product of ADMIT NEXUS.
+    <a href="https://admitnexus.com">admitnexus.com</a><br>
+    © 2026 ADMIT NEXUS. All rights reserved.
+  </footer>
+
 </div>
-
-<div class="limits">
-  <b>What this is.</b> A receipt that the evidence bundle with the hash above is the
-  bundle recorded on the date above, and that its event chain was intact when it was
-  recorded. Recompute the hash of your copy and compare it with this one.<br><br>
-  <b>What this is not.</b> Not a certificate, not an approval, and not an assessment
-  of the product. Dossier does not certify anything and does not test firmware.
-  Conformity is decided by you and, where the law requires it, by a notified body.
-</div>
-
-<footer>
-  Dossier is a product of ADMIT NEXUS.
-  <a href="https://admitnexus.com">admitnexus.com</a><br>
-  © 2026 ADMIT NEXUS. جميع الحقوق محفوظة.
-</footer>
-
 </div>
 </body>
 </html>

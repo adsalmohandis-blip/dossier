@@ -8,23 +8,19 @@
 <meta property="og:title" content="Dossier price and how payment works | ADMIT NEXUS">
 <meta property="og:description" content="Free to record a release. $900 to $2,500 to have one prepared with you. The subscription tier is priced but not built yet, and the page says so.">
 <meta property="og:site_name" content="ADMIT NEXUS">
-<meta name="theme-color" content="#2A0A36">
+<meta name="theme-color" content="#581970">
 <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
+<div class="shell">
 <nav class="bar">
   <div class="in">
-    <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS">
-      <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-    </a>
-    <span class="div" aria-hidden="true"></span>
-    <a class="lock" href="../index.html">
-      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="currentColor"/></svg>
+    <a class="brand" href="../index.html">
+      <img src="../assets/admit-logo.png" alt="ADMIT" width="420" height="173">
+      <span class="rule" aria-hidden="true"></span>
+      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="#ffffff" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="#F3AA1F"/></svg>
       <span class="wm">Dossier</span>
     </a>
     <div class="navlinks">
@@ -58,9 +54,9 @@
     </tr>
     <tr class="pick">
       <td data-label="What">A release prepared with you</td>
-      <td class="rate" data-label="Rate">Free for the<br>first 5 teams,<br>then $900–2,500</td>
-      <td data-label="What you get">We wire the gates to your toolchain, assemble the bundle, produce the record and the receipt, and sit with your assessor. This is our time, not software, which is why there are only five free places</td>
-      <td data-label="Status"><span class="tag live">5 PLACES OPEN</span></td>
+      <td class="rate" data-label="Rate">$900–2,500<br>per release</td>
+      <td data-label="What you get">We wire the gates to your toolchain, assemble the bundle, produce the record and the receipt, and sit with your assessor. This is our time rather than software, so it is priced like time</td>
+      <td data-label="Status"><span class="tag live">AVAILABLE</span></td>
     </tr>
     <tr>
       <td data-label="What">Hosted and signed</td>
@@ -94,12 +90,11 @@
     <p><b>The tool.</b> Nothing to pay, no account, no sign-up. Install it from npm and
     it runs on your machine.</p>
     <p><b>A release prepared with you.</b> A short call first, to see whether your
-    repository and your toolchain make this worth doing at all. Five teams get this at no
-    charge, in exchange for telling us plainly what was useful and what was not. After
-    that it is a fixed price agreed in writing before any work starts: half on start, half
-    when the bundle, the record and the receipt are in your hands. Paid by bank transfer or
-    by a card link on the invoice. If the gates cannot be wired to your build, we say so on
-    the call and there is nothing to pay.</p>
+    repository and your toolchain make this worth doing at all. That call costs nothing. If
+    it is worth doing, you get a fixed price in writing before any work starts: half on
+    start, half when the bundle, the record and the receipt are in your hands. Paid by bank
+    transfer or by a card link on the invoice. If the gates cannot be wired to your build,
+    we say so on the call and there is nothing to pay.</p>
     <p><b>Hosted and signed.</b> When it ships it will be billed monthly through a merchant
     of record, so your invoice and your VAT are handled properly. Until then there is no
     checkout, because there is nothing to check out.</p>
@@ -114,8 +109,10 @@
   <h2>We do not watch you use it</h2>
   <p class="col">
     Dossier has no telemetry and no account, so we cannot see how many people run it or
-    what they run it on. That is deliberate: a tool that reads your gate results has no
-    business reporting them to anyone, least of all to us.
+    what they run it on. Nothing is uploaded unless you run a command whose whole job is to
+    upload, after it has shown you the exact content and you have answered yes. That is
+    deliberate: a tool that reads your gate results has no business reporting them to
+    anyone, least of all to us.
   </p>
   <p class="col">
     If you want to help us work out what is worth building, run
@@ -130,10 +127,10 @@
   <h2>How this goes, start to finish</h2>
   <ul class="steps">
     <li><b>Read the checklist</b><span class="c">free</span><span class="w">Seven sections on what a technical file is expected to hold for a connected device. No address asked for.</span></li>
-    <li><b>Install the tool</b><span class="c">free</span><span class="w">One command. It runs locally against a repository you already have. Nothing is sent anywhere.</span></li>
+    <li><b>Install the tool</b><span class="c">free</span><span class="w">One command. It runs on a repository you already have, and uploads nothing.</span></li>
     <li><b>Record one release</b><span class="c">free</span><span class="w">Point it at the gate reports your build already produces, record the decisions, approve the release. You get a bundle, a record and a receipt.</span></li>
     <li><b>Show it to whoever will assess you</b><span class="c">free</span><span class="w">This is the step that matters. If your assessor shrugs at it, tell us and we will say so publicly.</span></li>
-    <li><b>Have a release prepared with you</b><span class="c">5 free places</span><span class="w">For the release that has to be right. Free for the first five teams, in exchange for an honest verdict. After that, a fixed price.</span></li>
+    <li><b>Have a release prepared with you</b><span class="c">$900–2,500</span><span class="w">For the release that has to be right. We wire the gates, assemble the file and sit with your assessor. Fixed price, agreed before any work starts.</span></li>
     <li><b>Put it on every release</b><span class="c">not built</span><span class="w">Signed, hosted, exported. Asking below is how you hear when it exists.</span></li>
   </ul>
 </section>
@@ -142,8 +139,8 @@
   <h2>How to reach us</h2>
   <p class="col">One address, read by a person. Not a chatbot, not a form that goes nowhere.</p>
   <div class="howto">
-    <p><b>If you want one of the five free places,</b> send these four things and you get a
-    reply within two working days:</p>
+    <p><b>If you want a release prepared,</b> send these four things and you get a reply
+    within two working days, with a fixed price or an honest no:</p>
     <ul>
       <li>What the product is, and whether it carries a CE mark today</li>
       <li>The toolchain: Zephyr, ESP-IDF, PlatformIO, bare CMake, something else</li>
@@ -154,7 +151,7 @@
     the fix is public.</p>
     <p><b>If you want to be told when the hosted tier ships,</b> say so in one line. One
     message when there is something to say, and nothing else, ever.</p>
-    <a class="mailto" href="mailto:dossier@admitnexus.com?subject=Dossier%20%E2%80%94%20one%20of%20the%20five%20free%20places&amp;body=Product%3A%0ACE%20marked%20today%3A%0AToolchain%3A%0AReports%20we%20already%20produce%3A%0ANext%20release%3A%0AWho%20assesses%20us%3A%0A">dossier@admitnexus.com</a>
+    <a class="mailto" href="mailto:info@admitnexus.com?subject=Dossier%20%E2%80%94%20release%20preparation&amp;body=Product%3A%0ACE%20marked%20today%3A%0AToolchain%3A%0AReports%20we%20already%20produce%3A%0ANext%20release%3A%0AWho%20assesses%20us%3A%0A">info@admitnexus.com</a>
   </div>
   <div class="links" style="margin-top:22px">
     <a href="https://github.com/adsalmohandis-blip/dossier/issues">Open an issue</a>
@@ -165,27 +162,28 @@
 </div>
 </main>
 <footer>
-  <div class="sheet">
-    <div class="sig">
-      <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS" style="justify-self:start">
-        <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-      </a>
-      <div>Dossier is a product of ADMIT NEXUS, a brand of Al-Khawarizmi for Technological and
-      Information Systems. <a href="https://admitnexus.com">admitnexus.com</a></div>
+  <div class="in">
+    <div class="row">
+      <a href="https://admitnexus.com">admitnexus.com</a><span class="sep">·</span>
+      <a href="mailto:info@admitnexus.com">info@admitnexus.com</a><span class="sep">·</span>
+      <a href="../index.html">Home</a><span class="sep">·</span>
+      <a href="../how-it-works/">How it works</a><span class="sep">·</span>
+      <a href="../pricing/">Price</a><span class="sep">·</span>
+      <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>
     </div>
     <div class="cols">
-      <div>Dossier 0.1.0, schema <span class="mono">dossier.evidence/v0</span>. Source on
-        <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>, MIT licensed.
-        <a href="../index.html">Home</a> ·
-        <a href="../how-it-works/">How it works</a> ·
-        <a href="../pricing/">Price</a></div>
-      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations cited
-        here come from the Product Liability Directive (EU) 2024/2853 and the Cyber Resilience Act
-        (EU) 2024/2847; check them against the official texts for your own product.</div>
+      <div>Dossier is a product of ADMIT NEXUS. Version 0.1.0, schema
+        <span class="mono">dossier.evidence/v0</span>, MIT licensed.</div>
+      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations
+        cited here come from the Product Liability Directive (EU) 2024/2853 and the Cyber
+        Resilience Act (EU) 2024/2847; check them against the official texts for your own product.</div>
     </div>
-    <div class="rtl" lang="ar">© 2026 ADMIT NEXUS. جميع الحقوق محفوظة.</div>
+    <div class="copyright">© 2026 ADMIT NEXUS. All rights reserved.</div>
   </div>
 </footer>
 <script src="../assets/site.js"></script>
+<!-- MUSA, ADMIT's assistant. Served from admitnexus.com; deferred so a slow
+     or unreachable host cannot hold up the page. -->
+<script src="https://musa.admitnexus.com/api/v1/embed/dossier.js" defer></script>
 </body>
 </html>

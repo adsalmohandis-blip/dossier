@@ -8,23 +8,19 @@
 <meta property="og:title" content="Dossier — evidence for AI-assisted firmware | ADMIT NEXUS">
 <meta property="og:description" content="Your agent writes the firmware. Dossier records what it wrote, which gates passed and who approved it, then produces a file an assessor can verify. A product of ADMIT NEXUS.">
 <meta property="og:site_name" content="ADMIT NEXUS">
-<meta name="theme-color" content="#2A0A36">
+<meta name="theme-color" content="#581970">
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
+<div class="shell">
 <nav class="bar">
   <div class="in">
-    <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS">
-      <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-    </a>
-    <span class="div" aria-hidden="true"></span>
-    <a class="lock" href="index.html" aria-current="page">
-      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="currentColor"/></svg>
+    <a class="brand" href="index.html" aria-current="page">
+      <img src="assets/admit-logo.png" alt="ADMIT" width="420" height="173">
+      <span class="rule" aria-hidden="true"></span>
+      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="#ffffff" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="#F3AA1F"/></svg>
       <span class="wm">Dossier</span>
     </a>
     <div class="navlinks">
@@ -108,7 +104,7 @@
         <li>Analyse code. cppcheck does that; Dossier reads the report.</li>
         <li>Build an SBOM. Zephyr emits SPDX; Dossier links it.</li>
         <li>Certify anything. A notified body does that.</li>
-        <li>Reach the network. Nothing leaves your machine.</li>
+        <li>Reach the network on its own. Nothing is uploaded unless you ask for it by name.</li>
       </ul>
     </div>
   </div>
@@ -127,19 +123,16 @@
       <div class="n">stays with you</div>
       <h3>Evidence Bundle</h3>
       <p>The machine-readable file. Every change, gate, decision and approval, sealed with one hash.</p>
-      <p class="ar" dir="rtl" lang="ar">ملف الأدلة</p>
     </div>
     <div>
       <div class="n">for the person reading</div>
       <h3>Release Record</h3>
       <p>The same content written to be read: what was built, checked, decided and signed off.</p>
-      <p class="ar" dir="rtl" lang="ar">سجل الإصدار</p>
     </div>
     <div>
       <div class="n">safe to publish</div>
       <h3>Verification Receipt</h3>
       <p>One page carrying a hash, a date and a status. This is what sits behind the QR code.</p>
-      <p class="ar" dir="rtl" lang="ar">إيصال التحقق</p>
     </div>
   </div>
   <div class="onward" style="margin-top:26px">
@@ -157,8 +150,8 @@
     release prepared with you, and later, receipts signed and hosted at a link that stays up.
   </p>
   <div class="onward">
-    <p><b>Five teams get a release prepared at no charge,</b> in exchange for telling us
-    plainly what was useful and what was not.</p>
+    <p><b>The tool costs nothing and always will.</b> Having a release prepared with you
+    is our time, and it is priced like time.</p>
     <a href="pricing/">See the full price</a>
   </div>
 </section>
@@ -179,27 +172,28 @@
 </div>
 </main>
 <footer>
-  <div class="sheet">
-    <div class="sig">
-      <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS" style="justify-self:start">
-        <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
-      </a>
-      <div>Dossier is a product of ADMIT NEXUS, a brand of Al-Khawarizmi for Technological and
-      Information Systems. <a href="https://admitnexus.com">admitnexus.com</a></div>
+  <div class="in">
+    <div class="row">
+      <a href="https://admitnexus.com">admitnexus.com</a><span class="sep">·</span>
+      <a href="mailto:info@admitnexus.com">info@admitnexus.com</a><span class="sep">·</span>
+      <a href="index.html">Home</a><span class="sep">·</span>
+      <a href="how-it-works/">How it works</a><span class="sep">·</span>
+      <a href="pricing/">Price</a><span class="sep">·</span>
+      <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>
     </div>
     <div class="cols">
-      <div>Dossier 0.1.0, schema <span class="mono">dossier.evidence/v0</span>. Source on
-        <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>, MIT licensed.
-        <a href="index.html">Home</a> ·
-        <a href="how-it-works/">How it works</a> ·
-        <a href="pricing/">Price</a></div>
-      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations cited
-        here come from the Product Liability Directive (EU) 2024/2853 and the Cyber Resilience Act
-        (EU) 2024/2847; check them against the official texts for your own product.</div>
+      <div>Dossier is a product of ADMIT NEXUS. Version 0.1.0, schema
+        <span class="mono">dossier.evidence/v0</span>, MIT licensed.</div>
+      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations
+        cited here come from the Product Liability Directive (EU) 2024/2853 and the Cyber
+        Resilience Act (EU) 2024/2847; check them against the official texts for your own product.</div>
     </div>
-    <div class="rtl" lang="ar">© 2026 ADMIT NEXUS. جميع الحقوق محفوظة.</div>
+    <div class="copyright">© 2026 ADMIT NEXUS. All rights reserved.</div>
   </div>
 </footer>
 <script src="assets/site.js"></script>
+<!-- MUSA, ADMIT's assistant. Served from admitnexus.com; deferred so a slow
+     or unreachable host cannot hold up the page. -->
+<script src="https://musa.admitnexus.com/api/v1/embed/dossier.js" defer></script>
 </body>
 </html>
