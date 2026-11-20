@@ -23,6 +23,27 @@ Output: a signed-ready JSON record and a readable Markdown file, with a SHA-256 
 | **Decides** | architecture decision records with context, decision, consequences and supersedes |
 | **Proves** | an append-only, hash-chained event log; tampering with any event is detected |
 
+## What comes out
+
+Three artifacts, and none of them is a certificate.
+
+| Artifact | Where it lives | What it says |
+| --- | --- | --- |
+| **Evidence Bundle** (`bundles/<release>.json`) | with you | every change, gate, decision and approval, sealed with one hash |
+| **Release Record** (`bundles/<release>.md`) | with you | the same content, written to be read by a person |
+| **Verification Receipt** (`receipts/<prefix>.html`) | safe to publish | a hash, a date and a status, with a QR code and nothing else |
+
+```sh
+dossier bundle --release=v1.0.0
+dossier receipt .dossier/bundles/v1.0.0.json --org="Your company"
+```
+
+The receipt is one self-contained page: no scripts, no fonts fetched, no network calls, so it still
+works when it is opened from a folder years later. The QR code is generated locally by `src/qr.js`,
+which has no dependencies. Dossier does not certify, assess or approve anything, and the receipt
+says so on its face.
+
+
 ## What it does not do
 
 - It does not generate code. Your agent does that.
@@ -88,6 +109,36 @@ Recomputes the hash over the bundle's own content. Change one character anywhere
 `v0.1.0` — early. The bundle schema is `dossier.evidence/v0` and will change before `v1.0.0`.
 
 Signing, the public verification page and the transparency log are not in this release.
+
+
+## What we can see
+
+Nothing. Dossier has no telemetry, no account and no network code, and the source is here
+so you do not have to take that on trust.
+
+That leaves no way to learn what is worth building, so there is one command for it:
+
+```sh
+dossier report
+```
+
+It writes a single file of counts — which gates you turned on, how many passed, which
+toolchain was detected, how many decisions were recorded — prints every line to your
+terminal before writing it, and **sends nothing anywhere**. No file names, no hashes, no
+company or product names, no coverage figures, no names of people who approved. Read it,
+and mail it to `dossier@admitnexus.com` only if you are happy with what it says. The tool
+behaves identically whether you do or not.
+
+The report is assembled from a fixed list of derived numbers rather than by filtering your
+event log, so a field added to Dossier in a later version cannot reach a report by
+accident. `tests/report.test.js` asserts exactly that.
+
+## Price
+
+The tool is free and MIT licensed, which means that cannot be withdrawn later. What is
+charged for sits on top of it: preparing a release with you, and later, signing and hosting
+receipts. See [the price page](https://adsalmohandis-blip.github.io/dossier/pricing/).
+
 
 ## Licence
 

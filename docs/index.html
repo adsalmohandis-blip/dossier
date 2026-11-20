@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier — evidence for AI-assisted firmware | ADMIT NEXUS</title>
+<meta name="description" content="Your agent writes the firmware. Dossier records what it wrote, which gates passed and who approved it, then produces a file an assessor can verify. A product of ADMIT NEXUS.">
+<meta property="og:title" content="Dossier — evidence for AI-assisted firmware | ADMIT NEXUS">
+<meta property="og:description" content="Your agent writes the firmware. Dossier records what it wrote, which gates passed and who approved it, then produces a file an assessor can verify. A product of ADMIT NEXUS.">
+<meta property="og:site_name" content="ADMIT NEXUS">
+<meta name="theme-color" content="#2A0A36">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="bar">
+  <div class="in">
+    <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS">
+      <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
+    </a>
+    <span class="div" aria-hidden="true"></span>
+    <a class="lock" href="index.html" aria-current="page">
+      <svg class="mk" viewBox="0 0 20 24" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="1" y="1" width="13" height="18.5"/><path d="M4 6h7M4 9.5h7M4 13h4"/></g><circle cx="14.5" cy="17.5" r="5" fill="currentColor"/></svg>
+      <span class="wm">Dossier</span>
+    </a>
+    <div class="navlinks">
+      <a href="how-it-works/">How it works</a>
+      <a href="pricing/">Price</a>
+      <a class="hideS" href="cra-firmware-checklist.md">Checklist</a>
+      <a class="hideS" href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>
+    </div>
+  </div>
+</nav>
+<main id="main">
+<div class="sheet">
+<section class="head col">
+  <h1>Your firmware is now a product under strict liability.</h1>
+  <p class="lede">
+    An AI agent writes part of your firmware. From 9 December 2026 that firmware is a product
+    under EU law, and “the defect appeared after sale” is not a defence when the cause is software.
+    <strong>Dossier records what the agent wrote, which gates it passed and who approved it</strong>,
+    then produces a file an assessor can verify.
+  </p>
+
+  <div class="deadline">
+    <span class="n" id="count">—</span>
+    <span class="t" id="countLabel">days until the Product Liability Directive applies</span>
+  </div>
+</section>
+
+<div class="verifier" id="verifier">
+  <div class="vh">
+    <span class="name">bundles/v1.0.0.json</span>
+    <span class="state" id="state">VERIFIED</span>
+  </div>
+  <dl class="record">
+    <dt>release</dt><dd id="f-release">v1.0.0</dd>
+    <dt>written by</dt><dd id="f-model">claude-opus-5</dd>
+    <dt>task</dt><dd id="f-task">T-1 add temperature sensor read</dd>
+    <dt>static analysis</dt><dd id="f-static">0 findings, limit 0</dd>
+    <dt>coverage</dt><dd id="f-cov">84.2%, minimum 70%</dd>
+    <dt>approved by</dt><dd id="f-actor">eng.lead</dd>
+    <dt>decision</dt><dd id="f-adr">ADR-001 poll sensor instead of interrupt</dd>
+  </dl>
+  <div class="digest">digest <b id="digest">computing…</b></div>
+  <div class="vf">
+    <button class="act" id="tamper">Change one character</button>
+    <button class="act" id="restore" disabled>Restore the record</button>
+  </div>
+</div>
+<p class="note">
+  This runs the same comparison the command line runs: hash the record, check it against the one
+  recorded when the release was approved. Change anything at all and it stops matching.
+</p>
+
+<div class="col">
+  <div class="cmd">
+    <code><span class="p">$</span> npx dossier-cli init</code>
+    <button class="act" data-copy="npx dossier-cli init" style="margin-left:auto">Copy</button>
+  </div>
+  <div class="links">
+    <a href="how-it-works/">How it works</a>
+    <a href="pricing/">Price</a>
+    <a href="https://github.com/adsalmohandis-blip/dossier">Read the source</a>
+  </div>
+</div>
+
+<section>
+  <div class="pair">
+    <div>
+      <h2>What it records</h2>
+      <ul>
+        <li><b>Every change</b> and the model that produced it</li>
+        <li><b>Gate results</b> from the tools you already run</li>
+        <li><b>Approvals</b>, by name, with a date</li>
+        <li><b>Decisions</b> with context, consequences and what they replace</li>
+        <li><b>A chained log</b> where editing one entry breaks the next</li>
+      </ul>
+    </div>
+    <div class="refuse">
+      <h2>What it refuses to do</h2>
+      <ul>
+        <li>Write code. Your agent does that.</li>
+        <li>Analyse code. cppcheck does that; Dossier reads the report.</li>
+        <li>Build an SBOM. Zephyr emits SPDX; Dossier links it.</li>
+        <li>Certify anything. A notified body does that.</li>
+        <li>Reach the network. Nothing leaves your machine.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note" style="margin-top:26px">
+    A gate whose report is missing is recorded as skipped, never as passed. Silence is not evidence.
+  </p>
+</section>
+
+<section>
+  <h2>Three things come out, and none of them is a certificate</h2>
+  <p class="note" style="margin-bottom:22px">
+    Dossier does not certify, assess or approve anything, and the words on each artifact say so.
+  </p>
+  <div class="arts">
+    <div>
+      <div class="n">stays with you</div>
+      <h3>Evidence Bundle</h3>
+      <p>The machine-readable file. Every change, gate, decision and approval, sealed with one hash.</p>
+      <p class="ar" dir="rtl" lang="ar">ملف الأدلة</p>
+    </div>
+    <div>
+      <div class="n">for the person reading</div>
+      <h3>Release Record</h3>
+      <p>The same content written to be read: what was built, checked, decided and signed off.</p>
+      <p class="ar" dir="rtl" lang="ar">سجل الإصدار</p>
+    </div>
+    <div>
+      <div class="n">safe to publish</div>
+      <h3>Verification Receipt</h3>
+      <p>One page carrying a hash, a date and a status. This is what sits behind the QR code.</p>
+      <p class="ar" dir="rtl" lang="ar">إيصال التحقق</p>
+    </div>
+  </div>
+  <div class="onward" style="margin-top:26px">
+    <p><b>See a real one.</b> A receipt produced by the tool, with the bundle it describes,
+    so you can recompute the hash yourself.</p>
+    <a href="how-it-works/#receipt">Open the receipt</a>
+  </div>
+</section>
+
+<section>
+  <h2>Price</h2>
+  <p class="col">
+    The tool is free, and because it is MIT licensed that cannot be taken back later.
+    There is no trial, no countdown and no account. What we charge for sits on top: a
+    release prepared with you, and later, receipts signed and hosted at a link that stays up.
+  </p>
+  <div class="onward">
+    <p><b>Five teams get a release prepared at no charge,</b> in exchange for telling us
+    plainly what was useful and what was not.</p>
+    <a href="pricing/">See the full price</a>
+  </div>
+</section>
+
+<section>
+  <h2>Talk to a person</h2>
+  <p class="col">
+    One address, read by a person. Tell us what the product is, which toolchain you build with,
+    which reports your build already produces, and when your next release is. You get a reply within
+    two working days, with a fixed price or an honest no.
+  </p>
+  <div class="links">
+    <a href="pricing/#contact">What to send</a>
+    <a href="https://github.com/adsalmohandis-blip/dossier/issues">Report a bug</a>
+    <a href="cra-firmware-checklist.md">Take the free checklist</a>
+  </div>
+</section>
+</div>
+</main>
+<footer>
+  <div class="sheet">
+    <div class="sig">
+      <a class="plate" href="https://admitnexus.com" aria-label="ADMIT NEXUS" style="justify-self:start">
+        <img src="https://admitnexus.com/wp-content/uploads/admit/logo-h.png?v=3" alt="ADMIT NEXUS" onerror="this.outerHTML='&lt;span class=&quot;fallback&quot;&gt;ADMIT NEXUS&lt;/span&gt;'">
+      </a>
+      <div>Dossier is a product of ADMIT NEXUS, a brand of Al-Khawarizmi for Technological and
+      Information Systems. <a href="https://admitnexus.com">admitnexus.com</a></div>
+    </div>
+    <div class="cols">
+      <div>Dossier 0.1.0, schema <span class="mono">dossier.evidence/v0</span>. Source on
+        <a href="https://github.com/adsalmohandis-blip/dossier">GitHub</a>, MIT licensed.
+        <a href="index.html">Home</a> ·
+        <a href="how-it-works/">How it works</a> ·
+        <a href="pricing/">Price</a></div>
+      <div>Dossier is a tool, not legal advice, and it certifies nothing. Dates and obligations cited
+        here come from the Product Liability Directive (EU) 2024/2853 and the Cyber Resilience Act
+        (EU) 2024/2847; check them against the official texts for your own product.</div>
+    </div>
+    <div class="rtl" lang="ar">© 2026 ADMIT NEXUS. جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

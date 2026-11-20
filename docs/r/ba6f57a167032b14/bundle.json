@@ -1,0 +1,87 @@
+{
+  "schema": "dossier.evidence/v0",
+  "release": "v1.0.0",
+  "project": {
+    "name": "demo-fw",
+    "slug": "demo-fw"
+  },
+  "toolchain": {
+    "id": "unknown",
+    "label": "Unknown",
+    "build_command": null
+  },
+  "generated_at": "2026-11-20T03:57:28.574Z",
+  "event_count": 6,
+  "chain_head": "07752cf3027f290219e32a47639b8815174cb7a98ce609e3f68e2895a43214e4",
+  "changes": [
+    {
+      "task": "T-1",
+      "model": "claude-opus-5",
+      "provider": "anthropic",
+      "files": [
+        "src/sensor.c",
+        "src/sensor.h"
+      ],
+      "at": "2026-11-20T03:57:28.445Z"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "ADR-001",
+      "title": "Poll the sensor instead of using an interrupt",
+      "status": "accepted",
+      "context": "The I2C sensor can raise an interrupt, but the ISR would run during the radio window.",
+      "decision": "Poll the sensor every 500 ms from the main loop.",
+      "consequences": [
+        "Up to 500 ms of latency",
+        "No shared state between the ISR and the radio path"
+      ],
+      "supersedes": null,
+      "at": "2026-11-20T03:57:28.477Z"
+    }
+  ],
+  "approvals": [
+    {
+      "actor": "eng.lead",
+      "scope": "release",
+      "at": "2026-11-20T03:57:28.535Z"
+    }
+  ],
+  "gates": [
+    {
+      "gate": "static_analysis",
+      "status": "passed",
+      "reason": null,
+      "measured": 0,
+      "threshold": 0
+    },
+    {
+      "gate": "coverage",
+      "status": "passed",
+      "reason": null,
+      "measured": 85.8,
+      "threshold": 70
+    },
+    {
+      "gate": "binary_size",
+      "status": "skipped",
+      "reason": "disabled in config",
+      "measured": null,
+      "threshold": null
+    },
+    {
+      "gate": "human_approval",
+      "status": "passed",
+      "reason": null,
+      "measured": 1,
+      "threshold": 1
+    }
+  ],
+  "gate_summary": {
+    "passed": true,
+    "failed_gates": [],
+    "blocking_reason": null
+  },
+  "signature": null,
+  "bundle_hash": "ba6f57a167032b142e13e1c6a3efd88399ec6950c701d6dcd73657840ca846dd"
+}

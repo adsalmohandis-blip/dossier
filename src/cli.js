@@ -6,6 +6,8 @@ const path = require("path");
 const state = require("./state");
 const gates = require("./gates");
 const bundle = require("./bundle");
+const receipt = require("./receipt");
+const report = require("./report");
 const { detect } = require("./detect");
 
 const VERSION = require("../package.json").version;
@@ -48,6 +50,8 @@ Usage
   dossier gate run [--json]
   dossier bundle --release=v1.0.0 [--out=DIR] [--json]
   dossier verify <bundle.json> [--json]
+  dossier receipt <bundle.json> [--out=DIR] [--org=NAME] [--url-base=URL] [--logo=FILE] [--json]
+  dossier report [--out=FILE] [--json]
   dossier doctor [--json]
 
 Dossier records. It does not generate code, analyse code, build SBOMs or grant certification.
@@ -233,6 +237,63 @@ function cmdVerify(args) {
   if (!result.ok) process.exitCode = 1;
 }
 
+function cmdReceipt(args) {
+  const file = args._[1];
+  if (!file) throw new Error("Usage: dossier receipt <bundle.json>");
+  if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
+  const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
+
+  const options = {
+    org: args.flags.org ? String(args.flags.org) : null,
+    urlBase: args.flags["url-base"] ? String(args.flags["url-base"]) : null,
+    logo: args.flags.logo ? String(args.flags.logo) : null
+  };
+  const facts = receipt.facts(parsed, options);
+  const html = receipt.toHtml(parsed, options);
+
+  const outDir = args.flags.out
+    ? path.resolve(String(args.flags.out))
+    : path.join(path.dirname(path.resolve(file)), "receipts");
+  fs.mkdirSync(outDir, { recursive: true });
+  const htmlFile = path.join(outDir, `${facts.prefix}.html`);
+  fs.writeFileSync(htmlFile, html, "utf8");
+
+  out(args.flags, [
+    `Receipt written for ${facts.prefix}`,
+    `  ${htmlFile}`,
+    `Permanent link: ${facts.url}`,
+    facts.self_consistent
+      ? "The bundle matches its hash."
+      : `WARNING — the bundle does not match its hash (${facts.inconsistency}).`,
+    "",
+    "This receipt is a record, not a certificate. Host it yourself, or publish it",
+    "at the permanent link with a Team plan."
+  ], { ...facts, file: htmlFile });
+
+  if (!facts.self_consistent) process.exitCode = 1;
+}
+
+function cmdReport(args) {
+  const base = root(args.flags);
+  const built = report.build(base, { version: VERSION });
+
+  const file = args.flags.out
+    ? path.resolve(String(args.flags.out))
+    : path.join(base, "dossier-report.json");
+  fs.writeFileSync(file, `${JSON.stringify(built, null, 2)}\n`, "utf8");
+
+  out(args.flags, [
+    report.explain(built),
+    "",
+    `Written to ${path.relative(base, file) || file}`,
+    "",
+    "Nothing has been sent anywhere. If you want to help us work out which",
+    "parts of this are worth building, attach that file to an email to",
+    "dossier@admitnexus.com. If you would rather not, delete it and carry on;",
+    "the tool behaves identically either way."
+  ], built);
+}
+
 function cmdDoctor(args) {
   const base = root(args.flags);
   const checks = [];
@@ -257,6 +318,8 @@ const COMMANDS = {
   gate: cmdGate,
   bundle: cmdBundle,
   verify: cmdVerify,
+  receipt: cmdReceipt,
+  report: cmdReport,
   doctor: cmdDoctor
 };
 
