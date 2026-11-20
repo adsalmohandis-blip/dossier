@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier — evidence bundles for AI-assisted firmware</title>
+<meta name="description" content="Your agent writes the firmware. Dossier records what it wrote, which gates passed and who approved it, and produces the file you hand to an assessor.">
+<style>
+  :root {
+    --ink: #0f172a; --body: #334155; --quiet: #64748b; --line: #e2e8f0;
+    --accent: #0f766e; --accent-soft: #f0fdfa; --warn: #b91c1c; --bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--body);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { color: var(--ink); line-height: 1.25; }
+  h1 { font-size: 40px; letter-spacing: -0.02em; margin: 0 0 16px; }
+  h2 { font-size: 24px; margin: 56px 0 16px; }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  p { margin: 0 0 16px; }
+  a { color: var(--accent); }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  header { padding: 72px 0 8px; }
+  .kicker {
+    display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--warn); border: 1px solid #fecaca;
+    background: #fef2f2; padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  .lede { font-size: 19px; color: var(--body); }
+  .cmd {
+    background: #0b1220; color: #e2e8f0; border-radius: 10px; padding: 18px 20px;
+    font-size: 14.5px; overflow-x: auto; margin: 24px 0 8px;
+  }
+  .cmd .c { color: #5eead4; }
+  .cmd .d { color: #94a3b8; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 32px; }
+  .btn {
+    display: inline-block; padding: 11px 18px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 15px; border: 1px solid var(--accent); color: var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .artifact {
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 24px 0;
+  }
+  .artifact .bar {
+    background: #f8fafc; border-bottom: 1px solid var(--line); padding: 10px 16px;
+    font-size: 13px; color: var(--quiet);
+  }
+  .artifact .body { padding: 20px 22px; font-size: 14px; }
+  .artifact h4 { margin: 0 0 12px; font-size: 16px; color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0 18px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--quiet); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .03em; }
+  .pass { color: var(--accent); font-weight: 600; }
+  .skip { color: var(--quiet); }
+  .hash { font-size: 12.5px; color: var(--quiet); word-break: break-all; }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .card.hi { border-color: var(--accent); background: var(--accent-soft); }
+  .price { font-size: 28px; font-weight: 700; color: var(--ink); margin: 4px 0 2px; }
+  .per { font-size: 13px; color: var(--quiet); }
+  .no { color: var(--quiet); }
+  form { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 8px; }
+  input[type=email] {
+    flex: 1 1 260px; padding: 11px 14px; border: 1px solid var(--line);
+    border-radius: 8px; font-size: 15px;
+  }
+  button {
+    padding: 11px 18px; border-radius: 8px; border: 0; background: var(--accent);
+    color: #fff; font-weight: 600; font-size: 15px; cursor: pointer;
+  }
+  footer { margin: 72px 0 56px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--quiet); }
+  @media (max-width: 640px) { h1 { font-size: 31px; } .two { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="kicker">From 9 December 2026</span>
+  <h1>Your firmware is now a product under strict liability.</h1>
+  <p class="lede">
+    The EU Product Liability Directive treats embedded software as a product, and the defence
+    that a defect appeared after sale does not apply when the cause is software or a missing
+    update. Your coding agent writes that software. <strong>Dossier records what it wrote,
+    which gates it passed and who approved it</strong> — and produces the file you hand to an assessor.
+  </p>
+
+<div class="cmd">
+<span class="d"># in your firmware repo</span>
+<br><span class="c">npx</span> dossier-cli init
+<br><span class="c">npx</span> dossier-cli task start T-1 --title="add sensor read" --model=claude-opus-5
+<br><span class="c">npx</span> dossier-cli approve --actor="eng.lead" --release=v1.0.0
+<br><span class="c">npx</span> dossier-cli bundle --release=v1.0.0
+</div>
+
+<div class="row">
+  <a class="btn primary" href="https://github.com/adsalmohandis-blip/dossier">Get it on GitHub</a>
+  <a class="btn" href="#checklist">Free CRA checklist</a>
+</div>
+</header>
+
+<h2>What comes out</h2>
+<p>A JSON record and a readable file, with a SHA-256 hash anyone can re-verify — offline, without installing anything else, without contacting us.</p>
+
+<div class="artifact">
+  <div class="bar">.dossier/bundles/v1.0.0.md</div>
+  <div class="body">
+    <h4>Evidence bundle — v1.0.0</h4>
+    <table>
+      <tr><th>Gate</th><th>Status</th><th>Measured</th><th>Threshold</th></tr>
+      <tr><td>static_analysis</td><td class="pass">passed</td><td>0</td><td>0</td></tr>
+      <tr><td>coverage</td><td class="pass">passed</td><td>84.2%</td><td>70%</td></tr>
+      <tr><td>binary_size</td><td class="skip">skipped</td><td>—</td><td>—</td></tr>
+      <tr><td>human_approval</td><td class="pass">passed</td><td>1</td><td>1</td></tr>
+    </table>
+    <p style="margin:0 0 6px"><strong>Changes</strong> — T-1 “add temperature sensor read every 500ms”, written by <code>claude-opus-5</code>, 2 files.</p>
+    <p style="margin:0 0 6px"><strong>Decisions</strong> — ADR-001 Poll sensor instead of interrupt (accepted).</p>
+    <p style="margin:0 0 12px"><strong>Approvals</strong> — eng.lead approved release on 2026-11-20.</p>
+    <p class="hash">bundle hash: 2bff0c6f1b990acbc236e98a5e996a4aea649b74a238b1107679fccd616d5de3</p>
+  </div>
+</div>
+
+<p>A gate whose report is missing is recorded as <strong>skipped</strong>, never as passed. Silence is not evidence.</p>
+
+<h2>What it does not do</h2>
+<ul>
+  <li class="no">It does not generate code. Your agent does that.</li>
+  <li class="no">It does not analyse code. cppcheck and friends do; Dossier reads their reports.</li>
+  <li class="no">It does not build SBOMs. Zephyr emits SPDX; Dossier links it.</li>
+  <li class="no">It does not grant certification. A notified body does; Dossier prepares what they ask for.</li>
+  <li class="no">It does not touch the network. No telemetry, no accounts. Your code never leaves your machine.</li>
+</ul>
+
+<h2>Tamper with it and it says so</h2>
+<p>The event log is append-only and hash-chained: every entry carries the hash of the one before it. Rewrite an entry, delete one from the middle, or change a byte of a finished bundle, and verification fails and names where.</p>
+<div class="cmd"><span class="c">npx</span> dossier-cli verify .dossier/bundles/v1.0.0.json
+<br><span class="d">VERIFIED — bundle matches its hash.</span></div>
+<p style="font-size:14.5px;color:var(--quiet)">These checks ship as public tests in the repository, so you can read them before you trust them.</p>
+
+<h2>Pricing</h2>
+<div class="two">
+  <div class="card">
+    <h3 style="margin-top:0">Open</h3>
+    <div class="price">Free</div>
+    <div class="per">MIT, forever, no account</div>
+    <ul style="margin-top:14px">
+      <li>Capture, gates, decision records</li>
+      <li>Hash-chained log</li>
+      <li>Local bundle, unsigned</li>
+    </ul>
+  </div>
+  <div class="card hi">
+    <h3 style="margin-top:0">Team</h3>
+    <div class="price">$59</div>
+    <div class="per">per engineer / month</div>
+    <ul style="margin-top:14px">
+      <li>Signed bundles</li>
+      <li>Public verification page</li>
+      <li>Technical-documentation export</li>
+      <li>Archive that stays verifiable</li>
+    </ul>
+  </div>
+</div>
+<p style="font-size:14.5px;margin-top:18px">Ship one or two products a year instead? A single release bundle is <strong>$900–$2,500</strong>, which is how CE budgets are actually spent.</p>
+
+<h2 id="checklist">The checklist, free</h2>
+<p>A plain list of what the technical documentation asks for, and where each item comes from in a firmware project. No signup wall on the tool — this is just the paper version.</p>
+
+<!-- Plug in a form endpoint (Formspree, Tally, Buttondown...) before going live. -->
+<form action="" method="post" onsubmit="alert('Connect a form endpoint before publishing.');return false;">
+  <input type="email" name="email" placeholder="you@company.com" required>
+  <button type="submit">Send me the checklist</button>
+</form>
+<p style="font-size:13.5px;color:var(--quiet)">Or read it on GitHub without leaving an address.</p>
+
+<footer>
+  Dossier is an independent tool. It is not legal advice, and it does not certify anything.
+  Dates and obligations cited here come from the EU Product Liability Directive (EU) 2024/2853
+  and the Cyber Resilience Act; check them against the official texts for your product.
+</footer>
+
+</div>
+</body>
+</html>

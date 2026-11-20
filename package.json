@@ -1,0 +1,45 @@
+{
+  "name": "dossier-cli",
+  "version": "0.1.0",
+  "description": "Evidence bundles for AI-assisted firmware. Records what the agent wrote, which gates passed and who approved it.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "dossier": "bin/dossier.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adsalmohandis-blip/dossier.git"
+  },
+  "keywords": [
+    "firmware",
+    "embedded",
+    "compliance",
+    "evidence",
+    "cra",
+    "audit",
+    "ai",
+    "provenance",
+    "zephyr",
+    "platformio"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "smoke": "node bin/dossier.js --version && node bin/dossier.js help && node bin/dossier.js doctor --json",
+    "check": "npm test && npm run smoke"
+  },
+  "bugs": {
+    "url": "https://github.com/adsalmohandis-blip/dossier/issues"
+  },
+  "homepage": "https://github.com/adsalmohandis-blip/dossier#readme",
+  "author": "adsalmohandis-blip"
+}
